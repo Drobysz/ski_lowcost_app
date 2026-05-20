@@ -14,13 +14,23 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^9.0.1",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "classnames": "^2.5.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "jose": "^6.2.3",
+    "lucide-react": "^1.16.0",
+    "sass": "^1.99.0",
+    "swr": "^2.4.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "^4.4.3"
   }
 }

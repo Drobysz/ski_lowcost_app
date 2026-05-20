@@ -1,18 +1,56 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
-}
+} */
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+} */
+
+@theme{
+  /* palette of the shades of gray */
+  --color-gray-50:  #FBFBFB;
+  --color-gray-100: #F7F7F8;
+  --color-gray-200: #F1F3F4;
+  --color-gray-300: #E4E7EA;
+  --color-gray-400: #B8BFC7;
+  --color-gray-500: #9AA3AE;
+  --color-gray-600: #76808B;
+  --color-gray-700: #5C6470;
+  --color-gray-800: #3F454F;
+  --color-gray-900: #24272D;
+
+  /* blue */
+  --color-blue-700: #005BBF;
+  --color-blue-600: #2563EB;
+  --color-blue-800: #1A73E8;
+
+  /* green */
+  --color-green-700: #16A34A;
+
+  /* red */
+  --color-red-600: #DC2626;
+  --color-red-700: #BA1A1A;
+
+  /* orange / amber */
+  --color-orange-400: #FFB870;
+  --color-orange-500: #FF9800;
+
+  /* navy / dark blue */
+  --color-navy-900: #0F172A;
+  --color-navy-800: #1E293B;
+  --color-navy-950: #191C23;
+
+  /* brown */
+  --color-brown-700: #653900;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -23,4 +61,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */

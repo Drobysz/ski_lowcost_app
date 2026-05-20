@@ -1,0 +1,15 @@
+@reference "tailwindcss";
+
+.login_bg {
+    height: 192px;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.5) 80%,
+            rgb(255, 255, 255, 1) 100%
+        ),
+        url('/background_village.png') center / cover no-repeat;
+}

@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.mod_window_span_view {
+	box-shadow:
+		0px 0px 30px -8px rgba(0, 0, 0, 0.35);
+	@apply rounded-3xl;
+}
+
+.mod_window_section_view {
+	box-shadow:
+		0px 0px 30px -14px rgba(0, 0, 0, 0.35);
+	@apply rounded-3xl;
+}

@@ -1,0 +1,19 @@
+@reference "tailwindcss";
+
+.aside {
+    @apply flex flex-col justify-end
+        gap-4 p-12 text-white;
+}
+
+.aside_bg {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 91, 191, 0.05) 0%,
+            rgba(0, 91, 191, 0.6) 55%,
+            rgba(0, 91, 191, 1) 100%
+        ),
+        url('/aside_mountains.png') center / cover no-repeat;
+}

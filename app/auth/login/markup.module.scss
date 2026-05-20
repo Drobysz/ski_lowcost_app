@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.login_form_markup {
+    @apply flex flex-col gap-8
+        w-fit h-fit rounded-lg
+        overflow-hidden bg-white shadow-lg
+        border border-gray-300;
+}
+
+.form {
+    @apply flex flex-col gap-8
+        px-8 pb-8 pt-2;
+}

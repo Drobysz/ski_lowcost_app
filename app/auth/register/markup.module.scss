@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+
+.register_form_markup {
+    @apply grid grid-cols-5
+        w-5xl h-fit rounded-lg
+        overflow-hidden
+        bg-white shadow-lg;
+}
+
+.aside_part {
+    @apply col-span-2;
+}
+
+.form_part {
+    @apply col-span-3;
+}

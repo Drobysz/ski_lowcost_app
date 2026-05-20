@@ -1,0 +1,7 @@
+@reference "tailwindcss";
+
+.register_form {
+    @apply flex flex-col gap-8
+        p-16 border rounded-[inherit]
+        border-gray-300 rounded-l-none border-l-0;
+}
