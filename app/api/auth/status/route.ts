@@ -5,6 +5,6 @@ export async function GET() {
     const refreshToken = await getToken("refresh");
 
     return NextResponse.json({
-        isLoggedIn: refreshToken ? true : false
+        isLoggedIn: refreshToken ? "auth" : "no_auth"
     });
 }

@@ -6,6 +6,15 @@ export interface LoginTokensInterface {
     refresh_token: string;
 }
 
+export type TokenPair = LoginTokensInterface;
+
+export interface RegisterResponse {
+  data: {
+    id: number;
+  };
+  message: string;
+}
+
 export interface UserSession {
   id: number;
   first_name: string;

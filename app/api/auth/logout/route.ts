@@ -1,4 +1,5 @@
 import { deleteSession, getToken } from "@/auth/sessions/sesssions";
+import apiBaseUrl from "@/queries/apiBaseUrl";
 
 export async function POST() {
     const refreshToken = await getToken("refresh");
@@ -13,7 +14,7 @@ export async function POST() {
         return new Response("No access token found", { status: 400 });
     }
 
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/logout', {
+    const res = await fetch(apiBaseUrl + '/auth/logout', {
         method: "POST",
         headers:{
             "Content-Type" : "application/json",

@@ -1,32 +1,41 @@
 "use server"
 
-// Helpers
-import { logOutQuery } from "@/queries/auth_queries/authQueries";
-import { deleteSession } from "../sessions/sesssions";
-import { redirect } from "@/i18n/navigation";
-import { getLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
+import { deleteSession, getToken } from "../sessions/sesssions";
+import apiBaseUrl from "@/queries/apiBaseUrl";
 
+async function revokeBackendSession() {
+    const accessToken = await getToken("access");
+    const refreshToken = await getToken("refresh");
 
-export async function logoutClient (formData: FormData) {
-    const token = formData.get('token') as string;
-    await logout(token);
-}
-
-export async function logoutServer (token: string) {
-    await logout(token);
-}
-
-export async function logout (token: string) {
-    const res = await logOutQuery(token);
-    const locale = await getLocale();
-
-    if (res.status === 200) {
-        await deleteSession();
-        redirect({
-            href: '/login',
-            locale: locale
-        });
-    } else {
-        console.log('unsuccessful logout');
+    if (!accessToken || !refreshToken) {
+        return;
     }
+
+    await fetch(apiBaseUrl + "/auth/logout", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ refresh_token: refreshToken }),
+        cache: "no-store",
+    }).catch((error) => {
+        console.error("Failed to revoke backend session.", error);
+    });
+}
+
+export async function logoutClient () {
+    await logout();
+}
+
+export async function logoutServer () {
+    await logout();
+}
+
+export async function logout () {
+    await revokeBackendSession();
+    await deleteSession();
+    redirect('/auth/login');
 }

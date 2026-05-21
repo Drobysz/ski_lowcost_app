@@ -1,25 +1,23 @@
 "use server"
 
 import { cookies } from 'next/headers';
-import { UserSession } from '@/interface/Session';
 
 // Encryption
-import { encrypt, decrypt } from './encrypt';
+import { encrypt, decrypt, type SessionPayload } from './encrypt';
 
 export async function createSession(access_token: string, refresh_token: string ) {
-    console.log("Creating session with access token:", access_token.slice(0, 10) + "...");
-    console.log("Creating session with refresh token:", refresh_token.slice(0, 10) + "...");
-    const accessTokenExpiresAt = new Date(Date.now() + 1000 * 0.5 * 60 * 60 * 60); // 30 minutes
+    const accessTokenExpiresAt = new Date(Date.now() + 1000 * 60 * 30);
     const accessTokenSession = await encrypt({access_token});
 
-    const refreshTokenExpiresAt = new Date(Date.now() + 1000 * 24 * 60 * 60 * 60 * 30); // 30 days
+    const refreshTokenExpiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
     const refreshTokenSession = await encrypt({refresh_token});
+    const secure = process.env.NODE_ENV === "production";
 
     const sessionStore = await cookies();
 
     sessionStore.set("access_token_session", accessTokenSession, {
         httpOnly: true,
-        secure: false,
+        secure,
         sameSite: "lax",
         expires: accessTokenExpiresAt,
         path: "/"
@@ -27,7 +25,7 @@ export async function createSession(access_token: string, refresh_token: string 
 
     sessionStore.set("refresh_token_session", refreshTokenSession, {
         httpOnly: true,
-        secure: false,
+        secure,
         sameSite: "lax",
         expires: refreshTokenExpiresAt,
         path: "/"
@@ -45,22 +43,21 @@ export async function getToken(
     }
     const hashed_value = sesstionStore.get(tokenTags[tokenTag])?.value;
     const token = await decrypt(hashed_value);
-
-    console.log(token ? `Found ${tokenTag} token in cookies.` : `No ${tokenTag} token found in cookies.`); // Debugging line   
     
-    return token
-        ? token[tokenTag + "_token"]
-        : undefined;
+    return tokenTag === "access"
+        ? token?.access_token
+        : token?.refresh_token;
 };
 
-export async function updateSession(sessionData: UserSession) {
+export async function updateSession(sessionData: SessionPayload) {
     const sessionStore = await cookies();
     const session = await encrypt(sessionData);
     const expiresAt = new Date(Date.now() + 1000 * 4 * 60 * 60);
+    const secure = process.env.NODE_ENV === "production";
 
     sessionStore.set("session", session, {
         httpOnly: true,
-        secure: false,
+        secure,
         sameSite: "lax",
         expires: expiresAt,
         path: "/"

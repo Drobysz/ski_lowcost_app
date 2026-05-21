@@ -1,11 +1,3 @@
-interface InputType {
-    label: string,
-    placeholder: string,
-    type: "string",
-    colSpan: number,
-    options?: string[]
-}
-
 const formsData = {
   first_name: {
     label: "First name",
@@ -52,7 +44,7 @@ const formsData = {
   },
   height: {
     label: "Height",
-    placeholder: "180",
+    placeholder: "1.80",
     type: "number",
     colSpan: 1,
   },
@@ -72,7 +64,7 @@ const formsData = {
     label: "Password",
     placeholder: "pass123!",
     type: "password",
-    colSpan: 1,
+    colSpan: 2,
   },
 };
 

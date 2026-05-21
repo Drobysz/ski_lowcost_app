@@ -38,14 +38,14 @@ export default function LoginPage() {
         if(state.success) {
             setIsLoggedIn("auth");
         }
-    }, [state.success]);
+    }, [setIsLoggedIn, state.success]);
 
     useEffect(() => {
         if (isLoggedIn !== "auth") return;
 
         mutate("access_token_session");
-        router.push('/rooms');
-    }, [isLoggedIn]);
+        router.push('/');
+    }, [isLoggedIn, router]);
 
     return (
         <section className={s.login_form_markup}>
@@ -53,9 +53,15 @@ export default function LoginPage() {
             <form
                 action={action}
                 className={s.form}
+                noValidate
             >
                 <Title />
-                <Forms />
+                <Forms errors={state.errors} />
+                {state.message ? (
+                    <p className="text-sm text-red-600" role="alert">
+                        {state.message}
+                    </p>
+                ) : null}
                 <SubmitBtn
                     isFilled={isFilled}
                     pending={pending}

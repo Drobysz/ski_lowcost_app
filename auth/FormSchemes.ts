@@ -1,24 +1,28 @@
 import { z } from "zod";
 
+const numberFromInput = (schema: z.ZodType<number>) =>
+    z.preprocess(
+        (value) => value === "" ? undefined : value,
+        schema,
+    );
+
 export const RegisterFormScheme = z.object({
     first_name: z.string().min(1, { message: "First name's required" }).max(50).trim(),
     last_name: z.string().min(1, { message: "Last name's required" }).max(50).trim(),
-    age: z.coerce.number().int().min(0, { message: "Age is required" }),
+    age: numberFromInput(z.coerce.number({ message: "Age is required" }).int().min(0, { message: "Age must be zero or greater" })),
     address: z.string().min(1, { message: "Address is required" }).max(255).trim(),
-    birth_date: z.string().min(1, { message: "Birth date is required" }),
+    birth_date: z.string().min(1, { message: "Birth date is required" }).refine(
+        (value) => !Number.isNaN(Date.parse(value)),
+        { message: "Birth date must be a valid date" },
+    ),
     tel: z.string().min(1, { message: "Tel number is required" }).max(50).trim(),
     skiing_level: z.enum(["beginner", "medium", "confirmed"], { message: "level is required" }),
-    height: z.coerce.number().min(0, { message: "Height is required" }),
-    weight: z.coerce.number().int().min(0, { message: "Weight is required" }),
-    shoe_size: z.coerce.number().int().min(0, { message: "Shoe size is required" }),
+    height: numberFromInput(z.coerce.number({ message: "Height is required" }).positive({ message: "Height must be greater than zero" })),
+    weight: numberFromInput(z.coerce.number({ message: "Weight is required" }).positive({ message: "Weight must be greater than zero" })),
+    shoe_size: numberFromInput(z.coerce.number({ message: "Shoe size is required" }).positive({ message: "Shoe size must be greater than zero" })),
     password: z
         .string()
-        .min(6, { message: "Be at least 6 characters" })
-        .regex(/[a-zA-Z]/, { message: "Contain at least one letter" })
-        .regex(/[0-9]/, { message: "At least one number required" })
-        .regex(/[^a-zA-Z0-9]/, {
-            message: "At least one special character required",
-        })
+        .min(8, { message: "Password must be at least 8 characters" })
         .trim(),
 });
 

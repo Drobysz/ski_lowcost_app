@@ -21,14 +21,10 @@ import {
 import { z } from "zod";
 
 export async function loginAction (_: FormState, formData: FormData) {
-    console.log("formData:", Object.fromEntries(formData));
-
     const parsed = LoginFormScheme.safeParse({
         tel:        formData.get('tel'),
         password:   formData.get('password')
     });
-
-    console.log("parsed:", parsed);
 
     if (!parsed.success) {
         const errors = z.flattenError(parsed.error).fieldErrors;
@@ -41,19 +37,15 @@ export async function loginAction (_: FormState, formData: FormData) {
         }
     }
 
-    const res = await logInQuery(
-        formData.get("tel") as string, 
-        formData.get("password") as string, 
-    );
+    const res = await logInQuery(parsed.data.tel, parsed.data.password);
 
-    console.log("status:", res.status);
-
-    if (!res.isLoggedIn) {
+    if (!res.ok) {
         return {
             errors: {
-                tel: "Incorrect credentials",
-                password: "Incorrect credentials"
-            }
+                tel: res.message,
+            },
+            message: res.message,
+            success: false,
         }
     }
     const data: LoginTokensInterface = res.data;
@@ -102,42 +94,37 @@ export async function registerAction (_: FormState, formData: FormData) {
     }
 
     const regRes = await regQuery({
-        first_name:     formData.get("first_name") as string,
-        last_name:      formData.get("last_name") as string,
-        age:            Number(formData.get("age")),
-        address:        formData.get("address") as string,
-        birth_date:     formData.get("birth_date") as string,
-        tel:            formData.get("tel") as string,
-        skiing_level:   formData.get("skiing_level") as SkiingLvl,
-        height:         Number(formData.get("height")),
-        weight:         Number(formData.get("weight")),
-        shoe_size:      Number(formData.get("shoe_size")),
-        password:       formData.get("password") as string,
+        first_name:     parsed.data.first_name,
+        last_name:      parsed.data.last_name,
+        age:            parsed.data.age,
+        address:        parsed.data.address,
+        birth_date:     parsed.data.birth_date,
+        tel:            parsed.data.tel,
+        skiing_level:   parsed.data.skiing_level as SkiingLvl,
+        height:         parsed.data.height,
+        weight:         parsed.data.weight,
+        shoe_size:      parsed.data.shoe_size,
+        password:       parsed.data.password,
 });
 
-    console.log("reg status:", regRes.status);
-    console.log("regRes:", regRes);
-
-    if (!regRes.isRegistered) {
+    if (!regRes.ok) {
         return {
             success: false,
-            message: 'Failed to register'
+            message: regRes.message
         }
     }
 
     const logRes = await logInQuery(
-        formData.get("email") as string, 
-        formData.get("password") as string,
+        parsed.data.tel,
+        parsed.data.password,
     );
 
-    if (!logRes.isLoggedIn) {
+    if (!logRes.ok) {
         return {
             success: false,
-            message: 'Failed to log in'
+            message: 'Account created, but sign-in failed. Please log in with your phone number.'
         }
     }
-
-    console.log("log status:", logRes.status);
 
     const data: LoginTokensInterface = logRes.data;
 

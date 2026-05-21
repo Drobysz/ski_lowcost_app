@@ -1,12 +1,10 @@
 'use client'
 
 import { AuthContext } from "@/app/auth/context/auth.context";
-import { RegFormType } from "@/app/auth/interfaces";
-import { ChangeEvent, useContext, useEffect } from "react";
+import { ChangeEvent, useContext } from "react";
 import formsData from "./inputs";
 import { Input } from "@/components";
 import { FormError } from "@/auth/FormSchemes";
-import cn from "classnames";
 
 export const Forms = ({
     errors
@@ -18,8 +16,6 @@ export const Forms = ({
 
     const handleForm = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        console.log("name: ", name);
-        console.log("value: ", value);
 
         setRegFormData((prev) => ({
             ...prev,
@@ -44,6 +40,11 @@ export const Forms = ({
                         errors && errors[k as keyof FormError]
                         &&
                         errors[k as keyof FormError]
+                    }
+                    autoComplete={
+                        k === "password"
+                            ? "new-password"
+                            : undefined
                     }
                 />
             ))}

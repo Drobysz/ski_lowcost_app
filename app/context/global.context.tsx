@@ -6,12 +6,6 @@ import {
 } from "./global.interface";
 import { AuthStatus } from "@/interface/Auth.interface";
 
-export const emptyAuthData = {
-	full_name: "",
-	email: "",
-	password: ""
-};
-
 export const GlobalContext = createContext<GlobalContextInterface>({
 	isLoggedIn: "none",
 
@@ -27,9 +21,13 @@ export const GlobalContextProvider = ({
 
 	useEffect(() => {
 		async function checkStatus() {
-			const res = await fetch("/api/auth/status");
-			const { isLoggedIn } = await res.json();
-			setIsLoggedIn(isLoggedIn);
+			try {
+				const res = await fetch("/api/auth/status");
+				const { isLoggedIn } = await res.json();
+				setIsLoggedIn(isLoggedIn);
+			} catch {
+				setIsLoggedIn("no_auth");
+			}
 		}
 		
 		checkStatus();

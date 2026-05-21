@@ -49,14 +49,14 @@ export const RegForm = ({
         if(state.success) {
             setIsLoggedIn("auth");
         }
-    }, [state.success]);
+    }, [setIsLoggedIn, state.success]);
 
     useEffect(() => {
         if (isLoggedIn !== "auth") return;
 
         mutate("access_token_session");
-        router.push('/rooms');
-    }, [isLoggedIn]);
+        router.push('/');
+    }, [isLoggedIn, router]);
 
     return(
         <div className={cn(
@@ -67,10 +67,16 @@ export const RegForm = ({
             <form
                 action={action}
                 className="flex flex-col gap-4"
+                noValidate
             >
                 <Forms
                     errors={state.errors}
                 />
+                {state.message ? (
+                    <p className="text-sm text-red-600" role="alert">
+                        {state.message}
+                    </p>
+                ) : null}
                 <Terms
                     checked={applied}
                     setChecked={setApplied}

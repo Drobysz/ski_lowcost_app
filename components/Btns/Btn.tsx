@@ -6,15 +6,21 @@ export const Btn = ({
     form,
     fullWidth = false,
     children,
+    className,
+    disabled,
+    ...props
 }: BtnProps) => {
     return (
-        <button className={cn(
+        <button
+            {...props}
+            disabled={disabled}
+            className={cn(
             "px-4 py-2 transition-all duration-300",
             form === "rect"
                 ? "active:rotate-2 active:scale-95"
                 : "active:scale-99",
             form === "rect" ? "rounded-lg" : "rounded-full",
-            colorSet === "blue_ghost" ? "pointer-events-none" : "cursor-pointer",
+            disabled ? "pointer-events-none" : "cursor-pointer",
             fullWidth ? "w-full" : "w-fit", {
                 ["bg-blue-500 text-white hover:bg-blue-600"]: colorSet === "blue",
                 ["bg-blue-100 text-blue-500 hover:bg-blue-200"]: colorSet === "blue_ghost",
@@ -22,7 +28,9 @@ export const Btn = ({
                 ["bg-black text-white hover:bg-gray-800"]: colorSet === "black",
                 ["bg-transparent text-gray-700 hover:bg-gray-100"]: colorSet === "ghost",
                 ["bg-white text-blue-500 hover:bg-gray-200 border border-blue-400"]: colorSet === "white",
-            }
+            },
+            disabled && "opacity-70",
+            className,
         )}>
             {children}
         </button>

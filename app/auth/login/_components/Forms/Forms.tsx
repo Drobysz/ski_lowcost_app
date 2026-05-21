@@ -1,12 +1,10 @@
 'use client'
 
 import { AuthContext } from "@/app/auth/context/auth.context";
-import { LogFormType } from "@/app/auth/interfaces";
 import { ChangeEvent, useContext } from "react";
 import formsData from "./inputs";
 import { Input } from "@/components";
 import { FormError } from "@/auth/FormSchemes";
-import cn from "classnames";
 
 export const Forms = ({
     errors
@@ -40,6 +38,7 @@ export const Forms = ({
                         &&
                         errors[k as keyof FormError]
                     }
+                    autoComplete={k === "tel" ? "tel" : "current-password"}
                 />
             ))}
         </div>
