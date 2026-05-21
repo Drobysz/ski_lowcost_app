@@ -7,19 +7,54 @@ const numberFromInput = (schema: z.ZodType<number>) =>
     );
 
 export const RegisterFormScheme = z.object({
-    first_name: z.string().min(1, { message: "First name's required" }).max(50).trim(),
-    last_name: z.string().min(1, { message: "Last name's required" }).max(50).trim(),
-    age: numberFromInput(z.coerce.number({ message: "Age is required" }).int().min(0, { message: "Age must be zero or greater" })),
-    address: z.string().min(1, { message: "Address is required" }).max(255).trim(),
-    birth_date: z.string().min(1, { message: "Birth date is required" }).refine(
-        (value) => !Number.isNaN(Date.parse(value)),
-        { message: "Birth date must be a valid date" },
+    first_name: z
+        .string()
+        .min(1, { message: "First name's required" })
+        .max(50)
+        .trim(),
+    last_name: z
+        .string()
+        .min(1, { message: "Last name's required" })
+        .max(50)
+        .trim(),
+    age: numberFromInput(
+        z.coerce.number({ message: "Age is required" })
+        .int()
+        .min(0, { message: "Age must be zero or greater" })
     ),
-    tel: z.string().min(1, { message: "Tel number is required" }).max(50).trim(),
+    address: z
+        .string()
+        .min(1, { message: "Address is required" })
+        .max(255)
+        .trim(),
+    birth_date: z
+        .string()
+        .min(1, { message: "Birth date is required" })
+        .refine(
+            (value) => !Number.isNaN(Date.parse(value)),
+            { message: "Birth date must be a valid date" },
+        ),
+    tel: z
+        .string()
+        .min(1, { message: "Tel number is required" })
+        .max(50)
+        .trim(),
     skiing_level: z.enum(["beginner", "medium", "confirmed"], { message: "level is required" }),
-    height: numberFromInput(z.coerce.number({ message: "Height is required" }).int().min(0, { message: "Height must be zero or greater" }).max(3, { message: "Height must not be greater then 3m" })),
-    weight: numberFromInput(z.coerce.number({ message: "Weight is required" }).int().min(0, { message: "Weight must be zero or greater" }).max(150, { message: "Weight must not be greater then 150kg" })),
-    shoe_size: numberFromInput(z.coerce.number({ message: "Shoe size is required" }).int().min(0, { message: "Shoe size must be zero or greater" }).max(50, { message: "Shoe size must not be greater then 50" })),
+    height: numberFromInput(
+        z.coerce.number({ message: "Height is required" })
+        .int()
+        .min(0, { message: "Height must be zero or greater" })
+        .max(3, { message: "Height must not be greater then 3m" })
+    ),
+    weight: numberFromInput(
+        z.coerce.number({ message: "Weight is required" })
+        .int().min(0, { message: "Weight must be zero or greater" })
+        .max(150, { message: "Weight must not be greater then 150kg" })),
+    shoe_size: numberFromInput(
+        z.coerce.number({ message: "Shoe size is required" })
+        .int()
+        .min(0, { message: "Shoe size must be zero or greater" })
+        .max(50, { message: "Shoe size must not be greater then 50" })),
     password: z
         .string()
         .min(8, { message: "Password must be at least 8 characters" })
