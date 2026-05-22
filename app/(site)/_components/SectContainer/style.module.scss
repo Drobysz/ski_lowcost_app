@@ -2,8 +2,7 @@
 
 .centralize {
     display: grid;
-	grid-template-columns: 1fr minmax(0px, 1280px) 1fr;
-    @apply px-4;
+	grid-template-columns: minmax(2rem, auto) minmax(0px, 1280px) minmax(2rem, auto);
 }
 
 .centralize > div {
