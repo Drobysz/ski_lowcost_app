@@ -28,7 +28,8 @@ export const Input = ({
     return (
         <label className={cn(
             s.form_content_container,
-            colSpan && `col-span-${colSpan}`
+            colSpan === 2 && "col-span-2",
+            colSpan === 1 && "col-span-1"
         )}>
             <div className="flex gap-3 items-center-safe">
                 {label && <span className={s.label}>{label}</span>}

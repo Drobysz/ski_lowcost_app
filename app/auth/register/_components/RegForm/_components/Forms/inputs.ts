@@ -15,7 +15,7 @@ const formsData = {
     label: "Address",
     placeholder: "123 Alpine Ridge, Aspen, CO",
     type: "text",
-    colSpan: 2,
+    colSpan: 1,
   },
   birth_date: {
     label: "Birth date",
