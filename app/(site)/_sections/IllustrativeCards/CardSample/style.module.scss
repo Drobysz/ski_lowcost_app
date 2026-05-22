@@ -1,0 +1,19 @@
+@reference "tailwindcss";
+
+.card_bounds {
+    @apply p-8 flex flex-col
+        gap-4 w-full
+        max-w-93.25 border-2 
+        border-gray-200 rounded-2xl;
+}
+
+@media (max-width: 750px) {
+    .card_bounds {
+        @apply w-full shrink-0;
+    }  
+}
+
+.centralize > div:first-child,
+.centralize > div:last-child {
+    min-width: 0;
+}

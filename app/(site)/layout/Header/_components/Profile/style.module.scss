@@ -1,0 +1,8 @@
+@reference "tailwindcss";
+
+.user_icon {
+    @apply p-1 rounded-full
+        transition-all duration-300
+        hover:bg-blue-400 hover:text-white
+        active:scale-95;
+}

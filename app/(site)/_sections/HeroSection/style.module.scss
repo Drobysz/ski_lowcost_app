@@ -1,0 +1,10 @@
+@reference "tailwindcss";
+
+.hero_bgnd {
+    @apply flex justify-center;
+    background: url('/hero_section.png') center / cover no-repeat;;
+}
+
+.hero_inner {
+    @apply h-screen flex items-center px-8 w-full max-w-7xl min-w-70;
+}

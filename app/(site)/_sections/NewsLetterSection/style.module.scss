@@ -1,0 +1,37 @@
+@reference "tailwindcss";
+
+.bounds {
+    @apply p-20 pb-24 flex justify-center
+        items-center w-full rounded-4xl
+        relative bg-[#F6F3F2] overflow-hidden;
+}
+
+.bounds::before,
+.bounds::after {
+    content: '';
+    position: absolute;
+    width: 256px;
+    height: 256px;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.bounds::before {
+    background: #DBEAFE;
+    top: -120px;
+    right: -120px;
+}
+
+.bounds::after {
+    background: #FFEDD5;
+    bottom: -150px;
+    left: -100px;
+}
+
+.email_input {
+    @apply rounded-full bg-white
+        text-gray-700 px-8 pt-4.25 pb-4.75
+        w-full border border-gray-300;
+}

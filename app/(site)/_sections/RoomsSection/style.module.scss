@@ -1,0 +1,6 @@
+@reference "tailwindcss";
+
+.markup {
+    @apply flex flex-col gap-12
+        overflow-hidden;
+}

@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+.tag {
+    @apply absolute top-3 left-3 
+        text-gray-900 bg-gray-50/70
+        backdrop-blur-sm py-1 px-3
+        rounded-full;
+}
+
+.feed {
+    @apply flex w-full overflow-x-auto scroll-smooth
+        pointer-events-none;
+    
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE/Edge
+}
+
+.feed::-webkit-scrollbar {
+    display: none; // Chrome/Safari
+}
+

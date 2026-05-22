@@ -1,0 +1,11 @@
+@reference "tailwindcss";
+
+.header {
+    @apply px-8 py-2 flex items-center
+        justify-between border-b border-gray-300
+        bg-white/80 backdrop-blur-sm backdrop-opacity-50;
+}
+
+.h_title {
+    @apply text-2xl font-bold text-blue-800;
+}

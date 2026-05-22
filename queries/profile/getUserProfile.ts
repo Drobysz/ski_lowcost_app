@@ -5,5 +5,5 @@ export const getUserProfile = async ()=> {
 	if (!res.ok) {
 		throw new Error(data?.message ?? "Failed to fetch user");
 	}
-	return data;
+	return data.data;
 }

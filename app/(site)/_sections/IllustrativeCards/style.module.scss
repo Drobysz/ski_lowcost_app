@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+.ill_cards_markup {
+    @apply grid grid-cols-3 items-center;
+}
+
+@media (max-width: 1220px) {
+    .ill_cards_markup {
+        @apply flex gap-3 flex-wrap justify-center;
+    }  
+}
+
+@media (max-width: 750px) {
+    .ill_cards_markup {
+        @apply flex-col items-center;
+    }  
+
+    .ill_cards_markup li {
+        @apply w-full min-w-0 flex justify-center;
+    }
+
+}

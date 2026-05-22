@@ -1,0 +1,11 @@
+@reference "tailwindcss";
+
+.centralize {
+    display: grid;
+	grid-template-columns: 1fr minmax(0px, 1280px) 1fr;
+    @apply px-4;
+}
+
+.centralize > div {
+    min-width: 0;
+}

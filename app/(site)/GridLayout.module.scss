@@ -1,0 +1,11 @@
+.wrapper {
+	display: grid;
+	min-height: 100vh;
+	grid-auto-rows: auto 1fr auto;
+}
+
+.header {
+	position: sticky;
+	top: 0;
+	z-index: 30;
+}

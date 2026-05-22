@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+.hero_bounderies {
+    @apply p-2 rounded-full bg-white;
+}
+
+.hero_input {
+    @apply w-143.5 grid grid-cols-3;
+}
+.hero_input li {
+    @apply border-r border-r-gray-200
+    pl-6;
+}
+
+.hero_input li:last-child {
+    @apply border-r-0 pl-2;
+}
+
+.hero_input li span {
+    @apply text-sm text-gray-400;
+}

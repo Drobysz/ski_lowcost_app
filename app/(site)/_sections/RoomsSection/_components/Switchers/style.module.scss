@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+.switch {
+    @apply p-1 rounded-full
+        transition-all duration-200
+        hover:bg-gray-100 active:bg-gray-300
+        active:scale-97 w-fit h-fit border
+        border-gray-300;
+}
