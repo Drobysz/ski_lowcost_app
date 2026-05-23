@@ -1,0 +1,6 @@
+@reference "tailwindcss";
+
+.navbar_body {
+	@apply flex items-center
+		gap-3 h-fit relative;
+}
