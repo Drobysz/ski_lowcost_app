@@ -20,7 +20,8 @@ export default function LoginPage() {
     
     const { 
         isLoggedIn,
-        setIsLoggedIn
+        setIsLoggedIn,
+        setNotification
     } = useContext(GlobalContext);
     const {
         logFormData
@@ -35,10 +36,24 @@ export default function LoginPage() {
         );
     
     useEffect(() => {
+        if (state.message !== undefined) {
+            if (state.success) {
+                setNotification({
+                    status: "success",
+                    text: "Successfully logged in"
+                });
+            } else {
+                setNotification({
+                    status: "error",
+                    text: "Failed to log in"
+                });
+            }
+        }
+
         if(state.success) {
             setIsLoggedIn("auth");
         }
-    }, [setIsLoggedIn, state.success]);
+    }, [setIsLoggedIn, setNotification, state.success, state]);
 
     useEffect(() => {
         if (isLoggedIn !== "auth") return;

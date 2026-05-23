@@ -26,7 +26,8 @@ export const RegForm = ({
     
     const { 
         isLoggedIn,
-        setIsLoggedIn
+        setIsLoggedIn,
+        setNotification
     } = useContext(GlobalContext);
     const {
         regFormData
@@ -46,10 +47,23 @@ export const RegForm = ({
         );
     
     useEffect(() => {
+        if (state.message !== undefined) {
+            if (state.success) {
+                setNotification({
+                    status: "success",
+                    text: "Successfully registered"
+                });
+            } else {
+                setNotification({
+                    status: "error",
+                    text: "Failed to register"
+                });
+            }
+        }
         if(state.success) {
             setIsLoggedIn("auth");
         }
-    }, [setIsLoggedIn, state.success]);
+    }, [setIsLoggedIn, setNotification, state.success, state]);
 
     useEffect(() => {
         if (isLoggedIn !== "auth") return;

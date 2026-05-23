@@ -1,4 +1,6 @@
 import { forwardRef } from 'react';
+import cn from "classnames";
+import s from "./style.module.scss";
 
 interface ImageCoverProps extends React.HTMLAttributes<HTMLDivElement> {
   url: string;
@@ -14,7 +16,7 @@ export const ImageCover = forwardRef<HTMLDivElement, ImageCoverProps>(
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
-        className={className ?? 'shrink-0 p-4 w-76.5 h-52 rounded-2xl'}
+        className={cn(s.image_cover, className)}
         {...props}
       />
     );

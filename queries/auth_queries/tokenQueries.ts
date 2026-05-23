@@ -1,4 +1,4 @@
-import { createSession, getToken } from "@/auth/sessions/sesssions";
+import { createSession, deleteSession, getToken } from "@/auth/sessions/sesssions";
 import apiBaseUrl from "../apiBaseUrl";
 
 export const getRefreshedTokens = async () => {
@@ -59,6 +59,7 @@ export async function refreshAccessToken() {
     const refreshedTokensRes = await getRefreshedTokens();
     
     if (!refreshedTokensRes.ok) {
+        await deleteSession();
         return null;
     }
 

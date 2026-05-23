@@ -6,6 +6,12 @@ const numberFromInput = (schema: z.ZodType<number>) =>
         schema,
     );
 
+const emptyToUndefined = (schema: z.ZodTypeAny) =>
+    z.preprocess(
+        (value) => value === "" ? undefined : value,
+        schema.optional()
+    );
+
 export const RegisterFormScheme = z.object({
     first_name: z
         .string()
@@ -59,6 +65,81 @@ export const RegisterFormScheme = z.object({
         .string()
         .min(8, { message: "Password must be at least 8 characters" })
         .trim(),
+});
+
+export const UpdateFormScheme = z.object({
+    first_name: emptyToUndefined(
+        z
+            .string()
+            .max(50)
+            .trim()
+    ),
+    last_name: emptyToUndefined(
+        z
+            .string()
+            .max(50)
+            .trim()
+    ),
+    age: emptyToUndefined(
+        numberFromInput(
+            z.coerce.number()
+                .int()
+                .min(0, { message: "Age must be zero or greater" })
+        )
+    ),
+    address: emptyToUndefined(
+        z
+            .string()
+            .max(255)
+            .trim()
+    ),
+    birth_date: emptyToUndefined(
+        z
+            .string()
+            .refine(
+                (value) => !Number.isNaN(Date.parse(value)),
+                { message: "Birth date must be a valid date" },
+            )
+    ),
+    tel: emptyToUndefined(
+        z
+            .string()
+            .max(50)
+            .trim()
+    ),
+    skiing_level: emptyToUndefined(
+        z.enum(["beginner", "medium", "confirmed"])
+    ),
+    height: emptyToUndefined(
+        numberFromInput(
+            z.coerce.number()
+                .int()
+                .min(0, { message: "Height must be zero or greater" })
+                .max(3, { message: "Height must not be greater then 3m" })
+        )
+    ),
+    weight: emptyToUndefined(
+        numberFromInput(
+            z.coerce.number()
+                .int()
+                .min(0, { message: "Weight must be zero or greater" })
+                .max(150, { message: "Weight must not be greater then 150kg" })
+        )
+    ),
+    shoe_size: emptyToUndefined(
+        numberFromInput(
+            z.coerce.number()
+                .int()
+                .min(0, { message: "Shoe size must be zero or greater" })
+                .max(50, { message: "Shoe size must not be greater then 50" })
+        )
+    ),
+    password: emptyToUndefined(
+        z
+            .string()
+            .min(8, { message: "Password must be at least 8 characters" })
+            .trim()
+    ),
 });
 
 export const LoginFormScheme = z.object({

@@ -8,7 +8,6 @@ import { Eye, EyeOff } from "lucide-react";
 
 export const Input = ({
     placeholder,
-    value,
     name,
     type,
     label,
@@ -45,7 +44,6 @@ export const Input = ({
                     {...props}
                     type={inputType}
                     placeholder={placeholder}
-                    value={value}
                     name={name}
                     list={options ? listId : undefined}
                     

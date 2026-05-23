@@ -9,12 +9,16 @@ import {
     Loading,
     SignUpBtn
 } from "./_components";
+import { useContext } from "react";
+import { GlobalContext } from "@/app/context/global.context";
 
 export const Profile = ({
     user,
     isLoading,
     error
 }: ProfileProps)=> {
+    const { setModalWindow } = useContext(GlobalContext);
+
     // const errorStatus = error && "status" in error ? error.status : undefined;
     const shouldShowSignUp = (error || !user) && !isLoading;
 
@@ -32,7 +36,10 @@ export const Profile = ({
                     )}>
                         {user.first_name} {user.last_name}
                     </p>
-                    <button className={s.user_icon}>
+                    <button 
+                        className={s.user_icon}
+                        onClick={()=> setModalWindow("Profile")}
+                    >
                         <UserIcon />
                     </button>
                 </>

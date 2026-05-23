@@ -1,7 +1,0 @@
-@reference "tailwindcss";
-
-.tab {
-	@apply relative z-10 block
-		cursor-pointer transition-colors
-		duration-500 px-3;
-}

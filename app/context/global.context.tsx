@@ -1,15 +1,17 @@
 "use client";
 
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ComponentType, ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import useSWR from "swr";
 import {
+	AppNotification,
 	GlobalContextInterface,
 	ModalWindow
 } from "./global.interface";
 import { AuthStatus } from "@/interface/Auth.interface";
 import { fetchRooms, getAuthStatus } from "@/queries";
 import { useCurrentUser } from "@/hooks";
+import Windows from "../windows/Windows";
 
 export const GlobalContext = createContext<GlobalContextInterface>({
 	isLoggedIn: "none",
@@ -17,11 +19,14 @@ export const GlobalContext = createContext<GlobalContextInterface>({
 	blur: false,
 	isUserLoading: false,
 	isRoomsLoading: false,
+	notification: { status: "none", text: "" },
+	CurrModalWin: null,
 	mutateUser: async () => undefined,
 	mutateRooms: async () => undefined,
 
 	setIsLoggedIn: () => {},
-	setModalWindow: () => {}
+	setModalWindow: () => {},
+	setNotification: () => {}
 })
 
 export const GlobalContextProvider = ({
@@ -32,9 +37,12 @@ export const GlobalContextProvider = ({
 	const pathname = usePathname();
 	const [isLoggedIn, setIsLoggedIn] = useState<AuthStatus>("none");
 	const [modalWindow, setModalWindow] = useState<ModalWindow>("none");
+	const [notification, setNotification] = useState<AppNotification>({ status: "none", text: "" });
+
+	const CurrModalWin: ComponentType | null = Windows[modalWindow];
 
 	const blur = modalWindow !== "none";
-	const shouldFetchUser = isLoggedIn !== "no_auth";
+	const shouldFetchUser = isLoggedIn === "auth";
 	const {
 		data: user,
 		error: userError,
@@ -50,11 +58,9 @@ export const GlobalContextProvider = ({
 		"global-rooms",
 		fetchRooms,
 		{
-			revalidateOnMount: true,
-			revalidateIfStale: true,
-			revalidateOnFocus: true,
-			revalidateOnReconnect: true,
-			dedupingInterval: 5_000,
+			refreshInterval: 10 * 60 * 1000,
+			dedupingInterval: 10 * 60 * 1000,
+            shouldRetryOnError: (error) => error?.status !== 401,
 		}
 	);
 
@@ -84,11 +90,14 @@ export const GlobalContextProvider = ({
 				rooms,
 				isRoomsLoading,
 				roomsError,
+				notification,
+				CurrModalWin,
 				mutateUser,
 				mutateRooms,
 
 				setIsLoggedIn,
-				setModalWindow
+				setModalWindow,
+				setNotification
 			}}
 		>
 			{children}

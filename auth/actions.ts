@@ -14,11 +14,73 @@ import { createSession } from "./sessions/sesssions";
 import {
     RegisterFormScheme,
     LoginFormScheme,
-    FormState
+    FormState,
+    UpdateFormScheme
 } from "@/auth/FormSchemes";
 
 // Form data parse tool
 import { z } from "zod";
+import { cookies } from "next/headers";
+
+export async function updateAction(_:FormState, formData: FormData) {
+    const parsed = UpdateFormScheme.safeParse({
+        first_name:     formData.get("first_name"),
+        last_name:      formData.get("last_name"),
+        age:            formData.get("age"),
+        address:        formData.get("address"),
+        birth_date:     formData.get("birth_date"),
+        tel:            formData.get("tel"),
+        skiing_level:   formData.get("skiing_level"),
+        height:         formData.get("height"),
+        weight:         formData.get("weight"),
+        shoe_size:      formData.get("shoe_size"),
+        password:       formData.get("password"),
+    });
+
+    if (!parsed.success) {
+        const errors = z.flattenError(parsed.error).fieldErrors;
+
+        return { 
+            errors: {
+                first_name: errors.first_name?.[0],
+                last_name: errors.last_name?.[0],
+                age: errors.age?.[0],
+                address: errors.address?.[0],
+                birth_date: errors.birth_date?.[0],
+                tel: errors.tel?.[0],
+                skiing_level: errors.skiing_level?.[0],
+                height: errors.height?.[0],
+                weight: errors.weight?.[0],
+                shoe_size: errors.shoe_size?.[0],
+                password: errors.password?.[0],
+            }
+        }
+    }
+
+    const filledFields = Object.fromEntries(
+        Object.entries(parsed.data).filter(([, v])=> v !== undefined)
+    );
+    const cookieStore = await cookies();
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/me`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Cookie: cookieStore.toString(),
+        },
+        body: JSON.stringify(filledFields),
+    });
+
+    if (!res.ok) {
+        return {
+            errors: {},
+            message: res.statusText,
+            success: false
+        }
+    }
+
+    return { success: true }
+}
 
 export async function loginAction (_: FormState, formData: FormData) {
     const parsed = LoginFormScheme.safeParse({

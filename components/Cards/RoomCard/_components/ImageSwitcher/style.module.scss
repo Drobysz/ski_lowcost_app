@@ -1,5 +1,9 @@
 @reference "tailwindcss";
 
+.image_switcher {
+    @apply relative flex w-76.5 h-52 max-w-full min-w-0 overflow-hidden;
+}
+
 .tag {
     @apply absolute top-3 left-3 
         text-gray-900 bg-gray-50/70
@@ -19,3 +23,14 @@
     display: none; // Chrome/Safari
 }
 
+@media (max-width: 640px) {
+    .image_switcher {
+        width: min(100%, 19.125rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .image_switcher {
+        width: min(100%, 15rem);
+    }
+}

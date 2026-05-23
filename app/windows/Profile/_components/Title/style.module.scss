@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.title {
+    @apply flex flex-col;
+}
+
+.welcome {
+    @apply text-gray-600 text-lg;
+}
+
+.name {
+    @apply text-gray-900 text-2xl;
+}

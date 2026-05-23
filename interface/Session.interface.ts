@@ -31,3 +31,16 @@ export interface UserSession {
   created_at: string;
   updated_at: string;
 }
+
+export interface UserProfileForm {
+  first_name?: string;
+  last_name?: string;
+  age?: number;
+  address?: string;
+  birth_date?: string;
+  tel?: string;
+  skiing_level?: SkiingLvl;
+  height?: number;
+  weight?: number;
+  shoe_size?: number;
+}

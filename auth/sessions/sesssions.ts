@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 import { encrypt, decrypt, type SessionPayload } from './encrypt';
 
 export async function createSession(access_token: string, refresh_token: string ) {
-    const accessTokenExpiresAt = new Date(Date.now() + 1000 * 60 * 30);
+    const accessTokenExpiresAt = new Date(Date.now() + 1000 * 60 * 60);
     const accessTokenSession = await encrypt({access_token});
 
     const refreshTokenExpiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);

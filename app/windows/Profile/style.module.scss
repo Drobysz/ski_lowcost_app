@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.prof_content {
+    @apply flex flex-col gap-8 relative;
+}

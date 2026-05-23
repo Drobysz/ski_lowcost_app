@@ -27,6 +27,8 @@ export const Btn = ({
                 ["bg-orange-500 text-white hover:bg-orange-600"]: colorSet === "orange",
                 ["bg-black text-white hover:bg-gray-800"]: colorSet === "black",
                 ["bg-transparent text-gray-700 hover:bg-gray-100"]: colorSet === "ghost",
+                ["bg-green-500 text-white hover:bg-green-600"]: colorSet === "green",
+                ["bg-red-500 text-white hover:bg-red-600"]: colorSet === "red",
                 ["bg-white text-blue-500 hover:bg-gray-200 border border-blue-400"]: colorSet === "white",
             },
             disabled && "opacity-70",

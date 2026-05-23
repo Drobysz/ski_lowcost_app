@@ -41,7 +41,7 @@ export const ImageSwitcher = ({
 
     return (
         <div 
-            className="relative flex w-76.5 h-52 overflow-hidden"
+            className={s.image_switcher}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
