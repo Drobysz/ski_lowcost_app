@@ -1,9 +1,15 @@
-export const getUserProfile = async ()=> {
-    const res = await fetch("/api/me");
+export const getUserProfile = async () => {
+	const res = await fetch("/api/me", {
+	credentials: "include",
+	});
 
-	const data = await res.json().catch(() => null);
-	if (!res.ok) {
-		throw new Error(data?.message ?? "Failed to fetch user");
+	if (res.status === 401) {
+	return null;
 	}
-	return data.data;
-}
+
+	if (!res.ok) {
+	throw new Error("Failed to load user profile");
+	}
+
+	return res.json();
+};
