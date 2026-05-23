@@ -17,11 +17,11 @@ export default function RootLayout({
     <html
       lang="en"
     >
-       <GlobalContextProvider>
-        <body className={jakarta_regular.className}>
+      <body className={jakarta_regular.className}>
+        <GlobalContextProvider>
           {children}
-        </body>
-      </GlobalContextProvider>
+        </GlobalContextProvider>
+      </body>
     </html>
   );
 }
