@@ -2,20 +2,32 @@ import apiBaseUrl from "@/queries/apiBaseUrl";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    const res = await fetch(`${apiBaseUrl}/rooms?page=1`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        },
-        next: {
-            revalidate: 3600
-        },
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15_000);
+    let res: Response;
+
+    try {
+        res = await fetch(`${apiBaseUrl}/rooms?page=1`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            cache: "no-store",
+            signal: controller.signal,
+        });
+    } catch {
+        return NextResponse.json({
+            message: "Failed to fetch rooms",
+            status: 500
+        }, { status: 500 });
+    } finally {
+        clearTimeout(timeoutId);
+    }
 
     if (!res.ok) {
         return NextResponse.json({
-            message: res.statusText || "Failed to fetch user profile",
+            message: res.statusText || "Failed to fetch rooms",
             status: res.status || 500
         }, { status: res.status || 500 });
     }

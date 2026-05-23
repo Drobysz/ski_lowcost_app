@@ -1,4 +1,5 @@
 import { deleteSession, getToken } from "@/auth/sessions/sesssions";
+import { refreshAccessToken } from "@/queries";
 import apiBaseUrl from "@/queries/apiBaseUrl";
 
 export async function POST() {
@@ -8,7 +9,7 @@ export async function POST() {
         return new Response("No refresh token found", { status: 400 });
     }
 
-    const accessToken = await getToken("access");
+    const accessToken = await getToken("access") ?? await refreshAccessToken();
 
     if (!accessToken) {
         return new Response("No access token found", { status: 400 });
