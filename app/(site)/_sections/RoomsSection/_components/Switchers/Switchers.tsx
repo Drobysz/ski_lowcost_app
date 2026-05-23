@@ -6,7 +6,6 @@ import s from "./style.module.scss";
 import cn from "classnames";
 
 export const Switchers = ({
-    dir,
     setDir,
     roomId,
     setRoomId,

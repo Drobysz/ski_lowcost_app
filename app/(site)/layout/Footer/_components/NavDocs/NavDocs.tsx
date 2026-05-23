@@ -6,7 +6,7 @@ import { UnderlinedLink } from "@/components";
 export const NavDocs = ()=> {
     return (
         <nav>
-            <ul className="flex gap-8">
+            <ul className="flex gap-8 max-[400px]:text-sm">
                 {docs.map(({href, label}, i)=> (
                     <UnderlinedLink
                         key={`footer-link-${i}`}

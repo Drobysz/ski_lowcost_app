@@ -2,5 +2,19 @@
 
 .markup {
     @apply flex flex-col gap-12
-        overflow-hidden;
+        overflow-hidden min-w-0;
+}
+
+.header_bar {
+    @apply flex justify-between gap-4 items-end min-w-0;
+}
+
+@media (max-width: 640px) {
+    .markup {
+        @apply gap-8;
+    }
+
+    .header_bar {
+        @apply flex-col items-start;
+    }
 }

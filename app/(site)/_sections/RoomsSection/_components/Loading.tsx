@@ -1,26 +1,25 @@
 import { Skeleton } from "@mui/material"
+import s from "./Loading.module.scss";
 
 export const Loading = ()=> {
     return (
-        <ul className="flex justify-center gap-3">
+        <ul className={s.loading_list}>
             {Array(3).fill(true).map((_, i)=> (
                 <li
                     key={`load-ex-room-${i}`}
-                    className="rounded-xl overflow-hidden flex flex-col gap-2"
+                    className={s.loading_card}
                 >
                     <Skeleton
-                        width={306}
-                        height={208}
+                        className={s.image_skeleton}
                         animation="wave"
                         variant="rectangular"
                     />
-                    <div className="flex flex-col gap-0.5 pl-0.5">
+                    <div className={s.text_group}>
                         {Array(3).fill(true).map((_, i)=> (
                            <Skeleton
                                 key={`sub-load-ex-room-${i}`}
+                                className={i == 0 ? s.text_skeleton_wide : s.text_skeleton}
                                 animation="wave"
-                                height={20}
-                                width={i == 0 ? 250 : 150}
                                 variant="rectangular"
                             /> 
                         ))}

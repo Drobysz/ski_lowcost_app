@@ -2,10 +2,17 @@
 	display: grid;
 	min-height: 100vh;
 	grid-auto-rows: auto 1fr auto;
+	min-width: 0;
 }
 
 .header {
 	position: sticky;
 	top: 0;
 	z-index: 30;
+}
+
+.wrapper > main {
+	min-width: 0;
+	width: 100%;
+	overflow: hidden;
 }

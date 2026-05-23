@@ -3,9 +3,59 @@
 .header {
     @apply px-8 py-2 flex items-center
         justify-between border-b border-gray-300
-        bg-white/80 backdrop-blur-sm backdrop-opacity-50;
+        backdrop-blur-3xl backdrop-opacity-50
+        gap-4 min-w-0 transition-colors duration-500 ease-in;
+}
+
+.brand {
+    @apply flex items-center gap-3 min-w-0 shrink-0;
 }
 
 .h_title {
-    @apply text-2xl font-bold text-blue-800;
+    @apply text-2xl font-bold text-blue-800 min-w-0;
+}
+
+.desktop_nav {
+    @apply min-w-0;
+}
+
+.mobile_menu {
+    @apply hidden w-full min-w-0 overflow-hidden;
+}
+
+.mobile_menu_open {
+    @apply block;
+}
+
+.mobile_nav_list {
+    @apply flex flex-col gap-1 pt-3 min-w-0;
+}
+
+.mobile_nav_list a {
+    @apply block rounded-xl px-4 py-3 text-gray-900
+        bg-gray-50 active:scale-99 transition-all duration-300;
+}
+
+@media (max-width: 820px) {
+    .header {
+        @apply flex-wrap;
+    }
+
+    .desktop_nav {
+        @apply hidden;
+    }
+}
+
+@media (max-width: 640px) {
+    .header {
+        @apply px-4 gap-3;
+    }
+
+    .brand {
+        @apply gap-2;
+    }
+
+    .h_title {
+        @apply text-xl;
+    }
 }

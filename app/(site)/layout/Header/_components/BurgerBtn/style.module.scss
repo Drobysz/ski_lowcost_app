@@ -1,0 +1,14 @@
+@reference "tailwindcss";
+
+.menu_button {
+    @apply hidden items-center justify-center flex-col
+        gap-1.5 w-10 h-10 transition-all duration-300
+        active:scale-95 shrink-0 hover:bg-gray-100
+        cursor-pointer rounded-2xl pt-0.5;
+}
+
+@media (max-width: 820px) {
+    .menu_button {
+        @apply flex;
+    }
+}

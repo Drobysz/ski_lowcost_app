@@ -1,8 +1,26 @@
 @reference "tailwindcss";
 
+.profile {
+    @apply flex items-center gap-2 min-w-0 shrink;
+}
+
+.user_name {
+    @apply text-sm min-w-0 truncate;
+}
+
 .user_icon {
     @apply p-1 rounded-full
         transition-all duration-300
         hover:bg-blue-400 hover:text-white
         active:scale-95;
+}
+
+@media (max-width: 640px) {
+    .profile {
+        @apply gap-1;
+    }
+
+    .user_name {
+        max-width: 8rem;
+    }
 }

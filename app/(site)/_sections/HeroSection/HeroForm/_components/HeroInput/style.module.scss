@@ -1,15 +1,15 @@
 @reference "tailwindcss";
 
 .hero_bounderies {
-    @apply p-2 rounded-full bg-white;
+    @apply p-2 rounded-full bg-white w-full max-w-full overflow-hidden;
 }
 
 .hero_input {
-    @apply max-w-143.5 w-full grid grid-cols-3;
+    @apply max-w-143.5 w-full grid grid-cols-3 min-w-0;
 }
 .hero_input li {
     @apply border-r border-r-gray-200
-    pl-6;
+    pl-6 min-w-0;
 }
 
 .hero_input li:last-child {
@@ -18,4 +18,90 @@
 
 .hero_input li span {
     @apply text-sm text-gray-400;
+}
+
+@media (max-width: 640px) {
+    .hero_input li button {
+        @apply text-xs;
+    }
+
+    .hero_input li span {
+        @apply text-xs;
+    }
+
+    .hero_input li p {
+        @apply text-sm;
+    }
+}
+
+@media (max-width: 470px) {
+    .hero_input li {
+        @apply pb-1 pl-4;
+    }
+
+    .hero_input li:last-child {
+        @apply pb-0;
+    }
+
+    .hero_input li button {
+        @apply text-[0.625rem] px-1 py-0.5;
+    }
+
+    .hero_input li span {
+        @apply text-[0.625rem];
+    }
+
+    .hero_input li p {
+        @apply text-xs;
+    }
+}
+
+@media (max-width: 385px) {
+    .hero_input li {
+        @apply pl-3;
+    }
+
+    .hero_input li:last-child {
+        @apply pb-0;
+    }
+
+    .hero_input li button {
+        @apply text-[0.5rem];
+    }
+
+    .hero_input li span {
+        @apply text-[0.5rem];
+    }
+
+    .hero_input li p {
+        @apply text-[0.625rem];
+    }
+}
+
+@media (max-width: 330px) {
+    .hero_input {
+        @apply flex-col grid-cols-1 gap-1;
+    }
+
+    .hero_bounderies {
+        @apply rounded-lg px-4 pt-0 pb-3;
+    }
+
+    .hero_input li {
+        @apply pl-0 border-r-0
+            border-b
+            border-b-gray-300 pb-3;
+    }
+
+    .hero_input li:last-child {
+        @apply pl-0 border-b-0;
+    }
+
+    .hero_input li:last-child {
+        @apply pl-0 pt-3;
+    }
+
+    .hero_input li button {
+        @apply py-2;
+    }
 }

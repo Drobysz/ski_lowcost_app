@@ -4,16 +4,12 @@
     @apply p-8 flex flex-col
         gap-4 w-full
         max-w-93.25 border-2 
-        border-gray-200 rounded-2xl;
+        border-gray-200 rounded-2xl
+        min-w-0;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 640px) {
     .card_bounds {
-        @apply w-full shrink-0;
+        @apply w-full max-w-none shrink p-6;
     }  
-}
-
-.centralize > div:first-child,
-.centralize > div:last-child {
-    min-width: 0;
 }

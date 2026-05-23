@@ -4,5 +4,47 @@
     @apply py-2 px-8
         flex justify-between
         items-center border-t
-        border-t-gray-300;
+        border-t-gray-300
+        gap-6 min-w-0;
+}
+
+.footer > div,
+.footer nav {
+    @apply min-w-0;
+}
+
+.footer nav ul {
+    @apply flex-wrap justify-end;
+}
+
+@media (max-width: 690px) {
+    .footer {
+        @apply px-4 py-4 flex-col;
+    }
+
+    .footer div {
+        @apply order-2;
+    }
+
+    .footer nav {
+        @apply order-1;
+    }
+
+    .footer div h3 {
+        @apply order-2 text-center;
+    }
+
+    .footer div p {
+        @apply order-1;
+    }
+
+    .footer nav ul {
+        @apply justify-start gap-4;
+    }
+}
+
+@media (max-width:400px) {
+    .footer {
+        @apply gap-3;
+    }
 }

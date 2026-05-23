@@ -15,17 +15,20 @@ export const Profile = ({
     isLoading,
     error
 }: ProfileProps)=> {
+    // const errorStatus = error && "status" in error ? error.status : undefined;
+    const shouldShowSignUp = (error || !user) && !isLoading;
+
     return (
-        <div className="flex items-center gap-2">
+        <div className={s.profile}>
             {isLoading && <Loading />}
 
-            {((error || !user) && !isLoading) && <SignUpBtn />}
+            {shouldShowSignUp && <SignUpBtn />}
             
             {user && (
                 <>
                     <p className={cn(
                         jakarta_bold.className,
-                        "text-sm"
+                        s.user_name
                     )}>
                         {user.first_name} {user.last_name}
                     </p>

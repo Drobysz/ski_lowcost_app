@@ -2,9 +2,24 @@
 
 .centralize {
     display: grid;
-	grid-template-columns: minmax(2rem, auto) minmax(0px, 1280px) minmax(2rem, auto);
+	grid-template-columns: minmax(2rem, auto) minmax(270px, 1080px) minmax(2rem, auto);
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .centralize > div {
     min-width: 0;
+}
+
+@media (max-width: 1024px) {
+    .centralize {
+        grid-template-columns: minmax(1.5rem, auto) minmax(0px, 1fr) minmax(1.5rem, auto);
+    }
+}
+
+@media (max-width: 640px) {
+    .centralize {
+        grid-template-columns: minmax(1rem, auto) minmax(0px, 1fr) minmax(1rem, auto);
+    }
 }

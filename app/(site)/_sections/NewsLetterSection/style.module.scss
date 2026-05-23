@@ -3,7 +3,16 @@
 .bounds {
     @apply p-20 pb-24 flex justify-center
         items-center w-full rounded-4xl
-        relative bg-[#F6F3F2] overflow-hidden;
+        relative bg-[#F6F3F2] overflow-hidden
+        min-w-0;
+}
+
+.content {
+    @apply flex flex-col gap-6 items-center w-full min-w-0;
+}
+
+.form {
+    @apply flex gap-4 justify-center w-full min-w-0;
 }
 
 .bounds::before,
@@ -33,5 +42,66 @@
 .email_input {
     @apply rounded-full bg-white
         text-gray-700 px-8 pt-4.25 pb-4.75
-        w-full border border-gray-300;
+        w-full min-w-0 border border-gray-300
+        max-w-100;
+}
+
+@media (max-width: 1024px) {
+    .bounds {
+        @apply p-12 pb-16;
+    }
+}
+
+@media (max-width: 640px) {
+    .bounds {
+        @apply p-6 py-10 rounded-2xl;
+    }
+
+    .form {
+        @apply flex-col items-center;
+    }
+
+    .form button {
+        @apply px-14 py-4;
+    }
+
+    .email_input {
+        @apply px-5;
+    }
+}
+
+@media (max-width: 390px) {
+    .content p {
+        @apply text-base;
+    }
+
+    .content p {
+        @apply text-sm;
+    }
+
+    .email_input {
+        @apply p-3;
+    }
+
+    .form button {
+        @apply py-2;
+    }
+}
+
+@media (max-width: 290px) {
+    .bounds {
+        @apply p-5 rounded-xl;
+    }
+
+    .form {
+        @apply gap-3;
+    }
+
+    .email_input {
+        @apply py-2;
+    }
+
+    .form button {
+        @apply py-1.5 px-8;
+    }
 }

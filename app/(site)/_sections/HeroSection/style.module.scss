@@ -1,10 +1,23 @@
 @reference "tailwindcss";
 
 .hero_bgnd {
-    @apply flex justify-center;
+    @apply flex justify-center overflow-hidden;
     background: url('/hero_section.png') center / cover no-repeat;;
 }
 
 .hero_inner {
-    @apply h-screen flex items-center px-8 w-full max-w-7xl min-w-70;
+    min-height: 100dvh;
+    @apply flex items-center px-8 w-full max-w-7xl min-w-0;
+}
+
+@media (max-width: 1024px) {
+    .hero_inner {
+        @apply px-6;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero_inner {
+        @apply px-4 py-10;
+    }
 }

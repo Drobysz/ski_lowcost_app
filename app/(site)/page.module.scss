@@ -1,0 +1,17 @@
+@reference "tailwindcss";
+
+.page {
+    @apply flex flex-col gap-20 pb-20 min-w-0 overflow-hidden;
+}
+
+@media (max-width: 1024px) {
+    .page {
+        @apply gap-16 pb-16;
+    }
+}
+
+@media (max-width: 640px) {
+    .page {
+        @apply gap-12 pb-12;
+    }
+}

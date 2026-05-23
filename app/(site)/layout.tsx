@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 import s from "./GridLayout.module.scss";
 import {
     Header,
-    Footer
+    Footer,
+    BlurBackground
 } from "./layout/index"
 
 export default function SiteLayout({
@@ -11,7 +12,7 @@ export default function SiteLayout({
   children: ReactNode;
 }>) {
     return (
-        <div className={s.wrapper}>
+        <BlurBackground className={s.wrapper}>
             <Header
                 className={s.header}
             />
@@ -19,6 +20,6 @@ export default function SiteLayout({
                 {children}
             </main>
             <Footer />
-        </div>
+        </BlurBackground>
     )
 }
