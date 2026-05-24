@@ -1,0 +1,30 @@
+@reference "tailwindcss";
+
+.image_switcher {
+    @apply relative flex w-76.5 h-52 max-w-full min-w-0 overflow-hidden;
+}
+
+.tag {
+    @apply absolute top-3 left-3 
+        text-gray-900 bg-gray-50/70
+        backdrop-blur-sm py-1 px-3
+        rounded-full;
+}
+
+.feed {
+    @apply flex w-full overflow-x-auto scroll-smooth
+        pointer-events-none;
+    
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE/Edge
+}
+
+.feed::-webkit-scrollbar {
+    display: none; // Chrome/Safari
+}
+
+@media (max-width: 410px) {
+    .image_switcher {
+        @apply w-56.5 h-56.5;
+    }
+}

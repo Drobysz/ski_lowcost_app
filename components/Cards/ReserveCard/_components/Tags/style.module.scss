@@ -1,0 +1,26 @@
+@reference "tailwindcss";
+
+.tag_bar {
+    @apply flex gap-8;
+}
+
+.tag {
+    @apply flex flex-col gap-2;
+}
+
+.title {
+    @apply text-sm text-gray-600;
+}
+
+.value {
+    @apply flex items-center gap-2;
+}
+
+@media (max-width: 520px) {
+    .title {
+        @apply text-[0.35rem];
+    }
+    .value {
+        @apply text-[0.5rem];
+    }
+}

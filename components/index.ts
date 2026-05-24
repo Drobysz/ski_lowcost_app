@@ -6,3 +6,4 @@ export * from "./Btns/Btn";
 export * from "./CheckBoxes/CheckBox/CheckBox";
 export * from "./Pagination/Pagination";
 export * from "./Cards/RoomCard/RoomCard";
+export * from "./Cards/ReserveCard/ReserveCard";

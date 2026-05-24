@@ -1,0 +1,14 @@
+@reference "tailwindcss";
+
+.navbar_body {
+	@apply flex items-center
+		gap-3 h-fit relative w-full
+		border-b-2 border-b-gray-300
+		pb-5;
+}
+
+@media (max-width: 540px) {
+	.navbar_body {
+		@apply gap-0;
+	}
+}

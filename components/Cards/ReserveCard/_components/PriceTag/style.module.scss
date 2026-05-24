@@ -1,0 +1,22 @@
+@reference "tailwindcss";
+
+.price_tag {
+    @apply text-blue-600 flex items-start gap-1;
+}
+
+.price_curr {
+    @apply text-xl;
+}
+
+.price_num {
+    @apply text-2xl;
+}
+
+@media (max-width: 520px) {
+    .price_curr {
+        @apply text-[0.7rem] pt-0.5;
+    }
+    .price_num {
+        @apply text-[1rem];
+    }
+}

@@ -1,0 +1,7 @@
+@reference "tailwindcss";
+
+.cursor {
+	@apply absolute z-0 h-2
+		rounded-full translate-y-8
+		bg-blue-500;
+}

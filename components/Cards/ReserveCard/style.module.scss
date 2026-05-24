@@ -1,0 +1,41 @@
+@reference "tailwindcss";
+
+.stay_card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    @apply rounded-2xl bg-white
+        shadow-xl overflow-hidden
+        max-w-200 w-full h-fit p-2
+        border border-gray-200;
+}
+
+.content {
+    @apply p-4 flex flex-col gap-10;
+}
+
+.title {
+    @apply text-xl;
+}
+
+
+@media (max-width: 765px) {
+    .stay_card {
+        display: flex;
+        @apply flex-col w-fit shrink-0 pt-8;
+    }
+}
+
+@media (max-width: 520px) {
+    .content {
+        @apply gap-4 p-2.5;
+    }
+    .stay_card {
+        @apply p-2;
+    }
+}
+
+@media (max-width: 410px) {
+    .stay_card {
+        @apply pt-3;
+    }
+}

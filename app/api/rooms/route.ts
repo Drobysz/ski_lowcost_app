@@ -1,4 +1,5 @@
 import apiBaseUrl from "@/queries/apiBaseUrl";
+import { failedToFetch } from "@/queries/statusResponses";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -17,19 +18,13 @@ export async function GET() {
             signal: controller.signal,
         });
     } catch {
-        return NextResponse.json({
-            message: "Failed to fetch rooms",
-            status: 500
-        }, { status: 500 });
+        return failedToFetch();
     } finally {
         clearTimeout(timeoutId);
     }
 
     if (!res.ok) {
-        return NextResponse.json({
-            message: res.statusText || "Failed to fetch rooms",
-            status: res.status || 500
-        }, { status: res.status || 500 });
+        return failedToFetch();
     }
 
     const data = await res.json().catch(() => null);

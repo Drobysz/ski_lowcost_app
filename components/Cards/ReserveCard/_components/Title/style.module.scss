@@ -1,0 +1,18 @@
+@reference "tailwindcss";
+
+.title {
+    @apply text-xl;
+}
+
+.calendar {
+    @apply flex items-center gap-1 text-gray-600 text-sm;
+}
+
+@media (max-width: 520px) {
+    .title {
+        @apply text-sm;
+    }
+    .calendar {
+        @apply text-[0.65rem];
+    }
+}

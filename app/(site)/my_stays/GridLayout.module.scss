@@ -1,0 +1,8 @@
+@reference "tailwindcss";
+
+.wrapper {
+    display: grid;
+	grid-template-columns: minmax(2rem, auto) minmax(270px, 1280px) minmax(2rem, auto);
+    width: 100%;
+    @apply w-full min-h-screen py-8;
+}

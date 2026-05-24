@@ -1,15 +1,16 @@
-export const fetchRooms = async () => {
+export const fetchReserves = async () => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15_000);
 
     try {
-        const res = await fetch("/api/rooms", {
+        const res = await fetch("/api/reserves", {
             method: "GET",
             headers: {
                 Accept: "application/json",
             },
             cache: "no-store",
             signal: controller.signal,
+            credentials: "include",
         });
 
         const data = await res.json().catch(() => null);
@@ -19,7 +20,6 @@ export const fetchRooms = async () => {
 
         return data.data;
     } catch (error) {
-        console.error(error)
         if (error instanceof DOMException && error.name === "AbortError") {
             throw new Error("Rooms request timed out");
         }

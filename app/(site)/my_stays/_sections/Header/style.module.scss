@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.header {
+    @apply flex flex-col gap-12;
+}
