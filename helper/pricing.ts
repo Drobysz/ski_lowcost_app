@@ -22,6 +22,8 @@ export type BookingPriceSummary = {
     grandTotal: number;
 };
 
+
+
 export const getMemberMultiplier = (age: number) => {
     if (age < 2) {
         return 0;
@@ -33,6 +35,7 @@ export const getMemberMultiplier = (age: number) => {
 
     return 1;
 };
+
 
 export const memberRequiresBed = (age: number) => age >= 2;
 
@@ -52,6 +55,7 @@ export const getMemberLabel = (user: UserSession, isLeader = false) => {
     return "Adult";
 };
 
+
 export const formatCurrency = (value: number) =>
     new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -59,17 +63,20 @@ export const formatCurrency = (value: number) =>
         maximumFractionDigits: 0,
     }).format(value);
 
+
 export const getRoomBedsTotal = (rooms: Room[]) =>
     rooms.reduce((total, room) => total + room.nb_lits, 0);
+
 
 export const getBookingPriceSummary = (
     rooms: Room[],
     members: UserSession[],
+    weeksNum: number
 ): BookingPriceSummary => {
     const bedsTotal = getRoomBedsTotal(rooms);
     const memberPrices = members.map((user, index) => {
         const multiplier = getMemberMultiplier(user.age);
-        const price = OCCUPIED_BED_PRICE * multiplier;
+        const price = OCCUPIED_BED_PRICE * multiplier * weeksNum;
 
         return {
             user,
@@ -82,7 +89,7 @@ export const getBookingPriceSummary = (
     const occupiedBeds = memberPrices.filter((item) => item.requiresBed).length;
     const emptyBeds = Math.max(0, bedsTotal - occupiedBeds);
     const memberTotal = memberPrices.reduce((total, item) => total + item.price, 0);
-    const emptyBedFee = emptyBeds * EMPTY_BED_PRICE;
+    const emptyBedFee = emptyBeds * weeksNum * EMPTY_BED_PRICE;
 
     return {
         memberPrices,

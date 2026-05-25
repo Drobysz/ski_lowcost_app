@@ -22,3 +22,38 @@ export const getPeriodString = (checkIn: string, checkOut: string)=> {
 export const toInputDate = (date: string | Date) => {
   return new Date(date).toISOString().split("T")[0];
 };
+
+export const addDaysToInputDate = (date: string | Date, days: number) => {
+  const nextDate = new Date(date);
+  nextDate.setDate(nextDate.getDate() + days);
+
+  return toInputDate(nextDate);
+};
+
+export const isValidInputDateRange = (checkIn: string, checkOut: string) => {
+  const start = new Date(checkIn).getTime();
+  const end = new Date(checkOut).getTime();
+
+  return Number.isFinite(start) && Number.isFinite(end) && end > start;
+};
+
+export const getWeeks = (checkIn: string, checkOut: string)=> {
+  const start = new Date(checkIn);
+  const end = new Date(checkOut);
+
+  return Math.ceil(Math.abs(end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 7));
+}
+
+export const getTimeStatus = (checkIn: string, checkOut: string, currentDate: string)=> {
+  const start = new Date(checkIn);
+  const end = new Date(checkOut);
+  const today = new Date(currentDate);
+
+  if (start >= today) {
+    return "upcoming";
+  } else if (end < today) {
+    return "past"
+  } else {
+    return "current"
+  }
+}

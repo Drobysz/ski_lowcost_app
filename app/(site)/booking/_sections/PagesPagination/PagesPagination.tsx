@@ -41,7 +41,7 @@ export const PagesPagination = ()=> {
 
     return (
         <>
-            {page && page_nb > 0 && (
+            {page && page_nb > 1 && (
                 <div className="flex items-center justify-center gap-4">
                     <button 
                         className={cn(

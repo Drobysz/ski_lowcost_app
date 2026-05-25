@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import cn from "classnames";
 import { jakarta_extrabold } from "@/fonts/fonts";
 import { Redirect } from "./_components";
+import Link from "next/link";
 
 export const Header = () => {
     const pathname = usePathname();
@@ -12,12 +13,14 @@ export const Header = () => {
 
     return (
         <header className={s.header}>
-            <p className={cn(
-                s.h_title,
-                jakarta_extrabold.className
-            )}>
-                Zarza-Ski
-            </p>
+            <Link href="/">
+                <p className={cn(
+                    s.h_title,
+                    jakarta_extrabold.className
+                )}>
+                    Zarza-Ski
+                </p>
+            </Link>
             <Redirect
                 page={page as "login" | "register"}
             />

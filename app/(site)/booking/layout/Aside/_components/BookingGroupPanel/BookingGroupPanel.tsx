@@ -4,14 +4,14 @@ import { LockKeyhole, UsersRound } from "lucide-react";
 import { useContext, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { GlobalContext } from "@/app/context/global.context";
-import { BookingContext } from "../../context/booking.context";
-import { UserSearch } from "../UserSearch/UserSearch";
-import { GroupMemberCard } from "../GroupMemberCard/GroupMemberCard";
+import { BookingContext } from "@/app/(site)/booking/context/booking.context";
+import { UserSearch, GroupMemberCard } from "./_components";
 import {
     formatCurrency,
     getBookingPriceSummary,
-    getMemberLabel
-} from "../../checkout/_utils/pricing";
+    getMemberLabel,
+    getWeeks
+} from "@/helper";
 import styles from "./style.module.scss";
 import type { UserSession } from "@/interface";
 
@@ -21,11 +21,13 @@ export const BookingGroupPanel = () => {
     const {
         choosedRooms = [],
         users = [],
+        available,
         setUsers
     } = useContext(BookingContext);
+    const weeksNum = getWeeks(available.check_in, available.check_out);
     const summary = useMemo(
-        () => getBookingPriceSummary(choosedRooms, users),
-        [choosedRooms, users],
+        () => getBookingPriceSummary(choosedRooms, users, weeksNum),
+        [choosedRooms, users, weeksNum],
     );
     const hasRooms = choosedRooms.length > 0;
     const hasMembers = users.length > 0;
@@ -71,7 +73,7 @@ export const BookingGroupPanel = () => {
                     <UsersRound size={24} />
                 </div>
                 <div>
-                    <h2>The Alpine Crew</h2>
+                    <h2>{`The ${currentUser?.last_name}'s Crew`}</h2>
                     <p>{summary.occupiedBeds}/{summary.bedsTotal} Beds Selected</p>
                 </div>
             </header>

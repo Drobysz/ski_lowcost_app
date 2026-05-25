@@ -6,6 +6,7 @@ import { Available } from "@/interface/Filter";
 import { fetchAvailable } from "@/queries/fetchAvailable";
 import { Room } from "@/interface/Reservation";
 import { UserSession } from "@/interface";
+import { isValidInputDateRange } from "@/helper/time";
 
 const today = new Date();
 const tomorrow = new Date();
@@ -66,6 +67,7 @@ export const BookingContextProvider = ({
 
     useEffect(()=> {
         if (!debounceAvailable.check_in || !debounceAvailable.check_out) return;
+        if (!isValidInputDateRange(debounceAvailable.check_in, debounceAvailable.check_out)) return;
         let ignore = false;
 
         const getAvailableRooms = async ()=> {

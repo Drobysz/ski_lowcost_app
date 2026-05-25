@@ -1,5 +1,5 @@
 import { BedDouble, LockKeyhole } from "lucide-react";
-import { EMPTY_BED_PRICE, formatCurrency } from "../../_utils/pricing";
+import { EMPTY_BED_PRICE, formatCurrency } from "@/helper";
 import styles from "./style.module.scss";
 import type { CheckoutSummaryProps } from "./CheckoutSummary.props";
 
@@ -8,6 +8,7 @@ export const CheckoutSummary = ({
     summary,
     pending,
     disabled,
+    weeksNum,
     onConfirm
 }: CheckoutSummaryProps) => {
     return (
@@ -43,6 +44,10 @@ export const CheckoutSummary = ({
                 <div>
                     <dt>Occupied beds</dt>
                     <dd>{summary.occupiedBeds}/{summary.bedsTotal}</dd>
+                </div>
+                <div>
+                    <dt>weeks</dt>
+                    <dd>{weeksNum}</dd>
                 </div>
             </dl>
 

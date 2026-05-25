@@ -1,29 +1,24 @@
 "use client";
 
-import { GlobalContext } from "@/app/context/global.context";
-import cn from "classnames";
-import s from "./style.module.scss";
 import { useContext } from "react";
-import { jakarta_bold } from "@/fonts/fonts";
+import s from "./style.module.scss";
+import { GlobalContext } from "@/app/context/global.context";
+import { LogOutBtn } from "./_components/LogOutBtn";
 
 export const Title = ()=> {
     const { user } = useContext(GlobalContext);
 
     return (
-        <>
-            {user && (
-                <h2 className={s.title}>
-                    <span className={s.welcome}>
-                        Welcome,
-                    </span>
-                    <span className={cn(
-                        s.name,
-                        jakarta_bold.className
-                    )}>
-                        {user.first_name} {user.last_name}
-                    </span>
-                </h2>
-            )}
-        </>
+        <div className={s.title_bar}>
+            <h2 className={s.title}>
+                <span className={s.welcome}>
+                    Welcome
+                </span>
+                <span className={s.name}>
+                    {user ? `${user?.first_name} ${user?.last_name}` : "Dear client"}
+                </span>
+            </h2>
+            <LogOutBtn />
+        </div>
     )
 }

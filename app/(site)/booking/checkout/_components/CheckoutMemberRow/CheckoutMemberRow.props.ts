@@ -1,4 +1,4 @@
-import type { MemberPrice } from "../../_utils/pricing";
+import type { MemberPrice } from "@/helper";
 
 export interface CheckoutMemberRowProps {
     item: MemberPrice;

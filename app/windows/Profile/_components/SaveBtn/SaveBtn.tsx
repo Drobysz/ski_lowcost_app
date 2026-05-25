@@ -9,7 +9,7 @@ export const SaveBtn = ({
     return (
         <Btn
             type="submit"
-            colorSet="green"
+            colorSet="blue"
             form="rect"
             className="self-end"
         >

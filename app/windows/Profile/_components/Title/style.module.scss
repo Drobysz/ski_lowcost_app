@@ -1,13 +1,26 @@
 @reference "tailwindcss";
 
+.title_bar {
+    @apply px-6 pt-10 pb-6 flex items-center
+        gap-10 border-b border-b-gray-300;
+}
+
 .title {
     @apply flex flex-col;
 }
 
 .welcome {
-    @apply text-gray-600 text-lg;
+    @apply text-xs font-extrabold tracking-[0.1em]
+        text-[#667895] uppercase;
 }
 
 .name {
-    @apply text-gray-900 text-2xl;
+    @apply mt-1 text-2xl font-extrabold leading-[1.15]
+        text-[#101827] capitalize;
+}
+
+@media (max-width: 680px) {
+    .title_bar {
+        @apply px-5 pt-5 pb-3;
+    }
 }

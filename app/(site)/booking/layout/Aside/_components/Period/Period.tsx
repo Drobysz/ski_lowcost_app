@@ -3,7 +3,7 @@
 import { BookingContext } from "@/app/(site)/booking/context/booking.context";
 import { useContext, useEffect, useState } from "react";
 import s from "./style.module.scss";
-import { toInputDate } from "@/helper/time";
+import { addDaysToInputDate, toInputDate } from "@/helper/time";
 
 export const Period = ()=> {
     const { 
@@ -14,6 +14,24 @@ export const Period = ()=> {
 
     const [checkIn, setCheckIn]= useState(toInputDate(available.check_in));
     const [checkOut, setCheckOut]= useState(toInputDate(available.check_out));
+    const minCheckOut = checkIn ? addDaysToInputDate(checkIn, 1) : undefined;
+
+    const changeCheckIn = (value: string) => {
+        setCheckIn(value);
+
+        if (value && (!checkOut || checkOut <= value)) {
+            setCheckOut(addDaysToInputDate(value, 1));
+        }
+    };
+
+    const changeCheckOut = (value: string) => {
+        if (checkIn && value && value <= checkIn) {
+            setCheckOut(addDaysToInputDate(checkIn, 1));
+            return;
+        }
+
+        setCheckOut(value);
+    };
 
     useEffect(()=> {
         if (!checkIn || !checkOut) return;
@@ -41,7 +59,7 @@ export const Period = ()=> {
                             type="date"
                             name="check_in"
                             value={checkIn}
-                            onChange={(e) => setCheckIn(e.target.value)}
+                            onChange={(e) => changeCheckIn(e.target.value)}
                         />
                     </label>
 
@@ -51,7 +69,8 @@ export const Period = ()=> {
                             type="date"
                             name="check_out"
                             value={checkOut}
-                            onChange={(e) => setCheckOut(e.target.value)}
+                            min={minCheckOut}
+                            onChange={(e) => changeCheckOut(e.target.value)}
                         />
                     </label>
                 </div>

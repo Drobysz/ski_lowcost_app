@@ -5,8 +5,7 @@ import s from "./style.module.scss";
 import {
     Title,
     Forms,
-    SaveBtn,
-    LogOutBtn
+    SaveBtn
 } from "./_components"
 import { FormState } from "@/auth/FormSchemes";
 import { updateAction } from "@/auth/actions";
@@ -45,14 +44,15 @@ export const Profile = ()=> {
     return (
         <div className={s.prof_content}>
             <Title />
-            <form
-                action={action}
-                className="flex flex-col gap-4"
-            >
-                <Forms errors={state.errors}/>
-                <SaveBtn pending={pending} />
-            </form>
-            <LogOutBtn />
+            <div className="relative max-h-[70vh] overflow-y-scroll px-6 pt-2 pb-5">
+                <form
+                    action={action}
+                    className="flex flex-col gap-4 py-5"
+                >
+                    <Forms errors={state.errors}/>
+                    <SaveBtn pending={pending} />
+                </form>
+            </div>
         </div>
     )
 }

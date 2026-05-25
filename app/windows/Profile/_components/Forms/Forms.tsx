@@ -6,6 +6,7 @@ import formsData from "./inputs"
 import { useContext } from "react";
 import { GlobalContext } from "@/app/context/global.context";
 import { UserSession } from "@/interface";
+import s from "./style.module.scss";
 
 export const Forms = ({
     errors
@@ -15,7 +16,7 @@ export const Forms = ({
     const { user } = useContext(GlobalContext);
 
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div className={s.grid}>
             {Object.entries(formsData).map(([k, v], i)=> (
                 <Input
                     key={`input${i}-${k}`}

@@ -3,9 +3,12 @@
 import { Btn } from "@/components";
 import s from "./style.module.scss";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { GlobalContext } from "@/app/context/global.context";
 
 export const HeroInput = ()=> {
     const r = useRouter();
+    const { isLoggedIn } = useContext(GlobalContext);
 
     return (
         <div className={s.hero_bounderies}>
@@ -32,7 +35,7 @@ export const HeroInput = ()=> {
                         form="round"
                         fullWidth
                         className="h-full"
-                        onClick={()=> r.push('/booking')}
+                        onClick={()=> r.push(isLoggedIn ? '/booking' : '/auth/login')}
                     >
                         Search Rooms
                     </Btn>

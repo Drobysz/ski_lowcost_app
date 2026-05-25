@@ -8,8 +8,9 @@ import { CheckoutSummary } from "./_sections/CheckoutSummary/CheckoutSummary";
 import { MembersPriceTable } from "./_sections/MembersPriceTable/MembersPriceTable";
 import {
     getBookingPriceSummary,
+    getWeeks,
     memberRequiresBed
-} from "./_utils/pricing";
+} from "@/helper";
 import styles from "./page.module.scss";
 import type { Room } from "@/interface/Reservation";
 import type { UserSession } from "@/interface";
@@ -50,9 +51,10 @@ export default function BookingCheckoutPage() {
         user: currentUser,
         setNotification
     } = useContext(GlobalContext);
+    const weeksNum = getWeeks(available.check_in, available.check_out);
     const summary = useMemo(
-        () => getBookingPriceSummary(choosedRooms, users),
-        [choosedRooms, users],
+        () => getBookingPriceSummary(choosedRooms, users, weeksNum),
+        [choosedRooms, users, weeksNum],
     );
     const canConfirm =
         Boolean(currentUser) &&
@@ -115,6 +117,7 @@ export default function BookingCheckoutPage() {
                 summary={summary}
                 pending={checkoutPending}
                 disabled={!canConfirm}
+                weeksNum={weeksNum}
                 onConfirm={confirmReservation}
             />
         </div>

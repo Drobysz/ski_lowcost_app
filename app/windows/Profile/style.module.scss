@@ -1,5 +1,24 @@
 @reference "tailwindcss";
 
 .prof_content {
-    @apply flex flex-col gap-8 relative;
+    @apply relative flex flex-col text-[#101827];
+}
+
+.prof_content > button {
+    @apply absolute bottom-8 left-12 h-11 rounded-[0.625rem]
+        text-sm font-bold;
+}
+
+@media (max-width: 680px) {
+    .prof_content > form {
+        @apply px-6 pt-5 pb-6;
+    }
+
+    .prof_content > form > button {
+        @apply w-full;
+    }
+
+    .prof_content > button {
+        @apply static mx-6 mt-0 mb-6 w-[calc(100%-3rem)];
+    }
 }

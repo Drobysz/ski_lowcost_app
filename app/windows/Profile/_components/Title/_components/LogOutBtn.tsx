@@ -43,7 +43,6 @@ export const LogOutBtn = ()=> {
             colorSet="red"
             form="rect"
             onClick={handleClick}
-            className="absolute left-0 bottom-0"
         >
             Log out
         </Btn>

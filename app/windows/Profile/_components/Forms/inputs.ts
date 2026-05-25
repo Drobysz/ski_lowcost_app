@@ -11,10 +11,10 @@ const formsData = {
     type: "text",
     colSpan: 1,
   },
-  address: {
-    label: "Address",
-    placeholder: "123 Alpine Ridge, Aspen, CO",
-    type: "text",
+  age: {
+    label: "Age",
+    placeholder: "25",
+    type: "number",
     colSpan: 1,
   },
   birth_date: {
@@ -24,7 +24,7 @@ const formsData = {
     colSpan: 1,
   },
   tel: {
-    label: "Phone number",
+    label: "Telephone",
     placeholder: "+1(555) 000-0000",
     type: "tel",
     colSpan: 1,
@@ -35,12 +35,6 @@ const formsData = {
     type: "select",
     colSpan: 1,
     options: ["beginner", "medium", "confirmed"]
-  },
-  age: {
-    label: "Age",
-    placeholder: "25",
-    type: "number",
-    colSpan: 1,
   },
   height: {
     label: "Height",
@@ -58,6 +52,12 @@ const formsData = {
     label: "Shoe size",
     placeholder: "42",
     type: "number",
+    colSpan: 1,
+  },
+  address: {
+    label: "Address",
+    placeholder: "123 Alpine Ridge, Aspen, CO",
+    type: "text",
     colSpan: 1,
   },
   password: {

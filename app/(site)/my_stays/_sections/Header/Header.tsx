@@ -7,25 +7,33 @@ import {
 } from "./_components";
 import { useContext } from "react";
 import { StayContext } from "../../context/stay.context";
+import { getTimeStatus } from "@/helper";
 
 export const Header = ()=> {
     const { reserves } = useContext(StayContext);
+    const today = new Date().toDateString();
 
     const tabs = [
         { 
-            href: "/my_stays?category=approaching",
-            label: "Approaching",
-            qnnty: reserves?.filter(r=> r.status == "approaching").length ?? 0
+            href: "/my_stays?category=upcoming",
+            label: "Upcoming",
+            qnnty: reserves?.filter(
+                r=> getTimeStatus(r.check_in, r.check_out, today) == "upcoming"
+            ).length ?? 0
         },
         { 
-            href: "/my_stays?category=in process", 
-            label: "In process",
-            qnnty: reserves?.filter(r=> r.status == "in process").length ?? 0
+            href: "/my_stays?category=current", 
+            label: "Current",
+            qnnty: reserves?.filter(
+                r=> getTimeStatus(r.check_in, r.check_out, today) == "current"
+            ).length ?? 0
         },
         { 
-            href: "/my_stays?category=finished", 
-            label: "Finished",
-            qnnty: reserves?.filter(r=> r.status == "finished").length ?? 0
+            href: "/my_stays?category=past", 
+            label: "Past",
+            qnnty: reserves?.filter(
+                r=> getTimeStatus(r.check_in, r.check_out, today) == "past"
+            ).length ?? 0
         },
     ];
 

@@ -6,6 +6,7 @@ import { Loading } from "./_components/Loading";
 import { useSearchParams } from "next/navigation";
 import { ReserveCard } from "@/components";
 import s from "./style.module.scss";
+import { getTimeStatus } from "@/helper";
 
 export const Reservations = ()=> {
     const {
@@ -16,8 +17,9 @@ export const Reservations = ()=> {
 
     const sp = useSearchParams()
     const category = (sp.get('category') ?? "approaching");
+    const today = new Date().toDateString();
     const filterefReserves = reserves
-        ? reserves?.filter(res=> res.status == category) 
+        ? reserves?.filter(res=> getTimeStatus(res.check_in, res.check_out, today) == category) 
         : [];
 
     return (

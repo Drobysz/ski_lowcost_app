@@ -17,21 +17,37 @@ export const ModalWindow = ({
         setModalWindow 
     } = useContext(GlobalContext);
 
+    if (modalWindow === "none") {
+        return null;
+    }
+
     return (
         <article
             className={cn(
                 className,
-                modalWindow === "none" && "hidden",
                 s.modal_window
             )}
+            onMouseDown={(event) => {
+                if (event.target === event.currentTarget) {
+                    setModalWindow("none");
+                }
+            }}
         >
-            <div 
-                className={s.cross}
-                onClick={()=> setModalWindow("none")}
+            <div
+                role="dialog"
+                aria-modal="true"
+                className={s.dialog}
             >
-                <X />
+                <button
+                    type="button"
+                    aria-label="Close modal"
+                    className={s.cross}
+                    onClick={()=> setModalWindow("none")}
+                >
+                    <X size={28} strokeWidth={1.9} />
+                </button>
+                {CurrModalWin && <CurrModalWin />}
             </div>
-            {CurrModalWin && <CurrModalWin />}
         </article>
     )
 }

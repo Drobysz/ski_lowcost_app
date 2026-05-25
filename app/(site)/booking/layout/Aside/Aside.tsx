@@ -2,9 +2,9 @@ import cn from "classnames";
 import { 
     Filters,
     Period,
-    RoomTags
+    RoomTags,
+    BookingGroupPanel
 } from "./_components";
-import { BookingGroupPanel } from "../../_components";
 
 export const Aside = ({
     className

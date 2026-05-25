@@ -1,5 +1,5 @@
 import { Baby, SmilePlus, UserRound } from "lucide-react";
-import { formatCurrency } from "../../_utils/pricing";
+import { formatCurrency } from "@/helper";
 import styles from "./style.module.scss";
 import type { CheckoutMemberRowProps } from "./CheckoutMemberRow.props";
 
