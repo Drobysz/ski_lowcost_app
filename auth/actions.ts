@@ -62,7 +62,7 @@ export async function updateAction(_:FormState, formData: FormData) {
     );
     const cookieStore = await cookies();
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/me`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/post?item=me&method=PATCH`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -70,6 +70,8 @@ export async function updateAction(_:FormState, formData: FormData) {
         },
         body: JSON.stringify(filledFields),
     });
+
+    console.log(res.status)
 
     if (!res.ok) {
         return {

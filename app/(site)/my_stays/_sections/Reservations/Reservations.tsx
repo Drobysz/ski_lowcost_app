@@ -19,8 +19,6 @@ export const Reservations = ()=> {
     const filterefReserves = reserves
         ? reserves?.filter(res=> res.status == category) 
         : [];
-    
-    console.log(filterefReserves)
 
     return (
         <section className={s.markup}>

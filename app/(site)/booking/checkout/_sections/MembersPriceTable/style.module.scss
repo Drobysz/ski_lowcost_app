@@ -1,0 +1,49 @@
+@reference "tailwindcss";
+
+.table {
+    @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm;
+}
+
+.header {
+    @apply mb-6 flex items-center justify-between gap-4;
+}
+
+.header h1 {
+    @apply text-3xl font-bold text-slate-900;
+}
+
+.header span {
+    @apply flex items-center gap-1 text-sm font-semibold text-blue-600;
+}
+
+.labels {
+    @apply mb-2 grid grid-cols-[minmax(0,1fr)_120px_150px] gap-4 border-b
+        border-slate-100 pb-2 text-xs font-semibold uppercase tracking-wide
+        text-slate-400;
+}
+
+.labels span:last-child {
+    @apply text-right;
+}
+
+.rows {
+    @apply flex flex-col gap-3;
+}
+
+@media (max-width: 680px) {
+    .table {
+        @apply p-4;
+    }
+
+    .header {
+        @apply items-start;
+    }
+
+    .header h1 {
+        @apply text-2xl;
+    }
+
+    .labels {
+        @apply hidden;
+    }
+}

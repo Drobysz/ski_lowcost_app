@@ -1,0 +1,32 @@
+@reference "tailwindcss";
+
+.period_body {
+    @apply border border-gray-400
+        bg-gray-100 max-w-71.5 w-full
+        p-8 rounded-2xl;
+}
+
+.period_body fieldset {
+    @apply flex flex-col gap-3;
+}
+
+.period_body h3 {
+    @apply text-2xl font-bold;
+}
+
+.inner_content {
+    @apply flex flex-col gap-2;
+}
+
+.inner_content label {
+    @apply flex flex-col gap-2 text-sm;
+}
+
+.inner_content label span {
+    @apply text-center font-medium;
+}
+
+.inner_content label input {
+    @apply bg-white px-4 py-3 rounded-xl
+        border border-gray-300;
+}

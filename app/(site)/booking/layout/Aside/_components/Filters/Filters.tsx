@@ -13,7 +13,7 @@ type FilterOption = {
 export const Filters = ()=> {
     const filters: FilterOption[] = [
         {
-            label: "Room size",
+            label: "Beds size",
             name: "room_size",
             values: [2, 4, 6]
         },

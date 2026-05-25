@@ -2,12 +2,15 @@ import {
     Header,
     Reservations
 } from "./_sections";
+import { Suspense } from "react";
 
 export default function MyStaysPage () {
     return (
         <div>
-            <Header />
-            <Reservations />
+            <Suspense fallback={null}>
+                <Header />
+                <Reservations />
+            </Suspense>
         </div>
     )
 }

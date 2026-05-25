@@ -18,3 +18,7 @@ export const getPeriodString = (checkIn: string, checkOut: string)=> {
 
     return `${month_in} ${day_in} - ${month_out} ${day_out} (${getNights(checkIn, checkOut)} nights)`;
 }
+
+export const toInputDate = (date: string | Date) => {
+  return new Date(date).toISOString().split("T")[0];
+};

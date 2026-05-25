@@ -1,0 +1,68 @@
+@reference "tailwindcss";
+
+.searchBox {
+    @apply relative flex flex-col gap-2;
+}
+
+.label {
+    @apply text-xs font-semibold uppercase tracking-wide text-slate-500;
+}
+
+.inputWrap {
+    @apply flex items-center gap-2 rounded-xl border border-slate-200 bg-white
+        px-3 py-2.5 text-slate-500 shadow-sm;
+}
+
+.inputWrap:focus-within {
+    @apply border-blue-500 ring-2 ring-blue-100;
+}
+
+.inputWrap input {
+    @apply min-w-0 flex-1 bg-transparent text-sm text-slate-900 outline-none
+        placeholder:text-slate-400;
+}
+
+.results {
+    @apply absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-xl
+        border border-slate-200 bg-white shadow-xl;
+}
+
+.state {
+    @apply px-4 py-3 text-sm text-slate-500;
+}
+
+.result {
+    @apply flex items-center gap-3 px-3 py-3 transition-colors duration-150;
+}
+
+.result + .result {
+    @apply border-t border-slate-100;
+}
+
+.result:hover {
+    @apply bg-slate-50;
+}
+
+.resultIcon {
+    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-full
+        bg-slate-100 text-slate-500;
+}
+
+.resultCopy {
+    @apply flex min-w-0 flex-1 flex-col;
+}
+
+.resultCopy strong {
+    @apply truncate text-sm font-semibold text-slate-900;
+}
+
+.resultCopy span {
+    @apply truncate text-xs text-slate-500;
+}
+
+.result button {
+    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-full
+        bg-blue-600 text-white transition-colors duration-150 hover:bg-blue-700
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
+        focus-visible:ring-offset-2;
+}

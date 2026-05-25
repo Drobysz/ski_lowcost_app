@@ -2,7 +2,7 @@
 
 import { GlobalContext } from "@/app/context/global.context";
 import { Reservation } from "@/interface/Reservation";
-import { fetchReserves } from "@/queries/reservesQueries";
+import { fetchReserves } from "@/queries/fetchReserves";
 import { createContext, ReactNode, useContext, useEffect } from "react";
 import useSWR from "swr";
 

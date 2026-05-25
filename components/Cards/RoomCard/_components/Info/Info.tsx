@@ -4,9 +4,12 @@ import Floor from "@/assets/floor.svg";
 import Balcony from "@/assets/balcony.svg";
 import { capitalize } from "@/helper/string";
 
-export const Info = ({ view, surface, balcony, floor, num }: InfoProps) => {
+export const Info = ({ view, surface, balcony, floor, num, ...props }: InfoProps) => {
     return (
-        <div className="flex flex-col gap-1.5">
+        <div 
+            {...props}
+            className="flex flex-col gap-1.5"
+        >
             <h3>
                 Room №{num}
             </h3>

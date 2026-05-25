@@ -1,0 +1,92 @@
+@reference "tailwindcss";
+
+.panel {
+    @apply flex w-full flex-col gap-5 rounded-2xl border border-slate-200
+        bg-slate-50 p-5 shadow-sm;
+    max-width: 20.5rem;
+}
+
+.header {
+    @apply flex items-center gap-3;
+}
+
+.avatar {
+    @apply flex shrink-0 items-center justify-center rounded-full
+        bg-slate-900 text-white ring-4 ring-blue-100;
+    width: 3.25rem;
+    height: 3.25rem;
+}
+
+.header h2 {
+    @apply text-lg font-bold text-slate-900;
+}
+
+.header p {
+    @apply text-sm text-slate-500;
+}
+
+.members {
+    @apply flex flex-col gap-3;
+}
+
+.emptyState {
+    @apply rounded-xl border border-dashed border-slate-300 bg-white px-4 py-5
+        text-center text-sm text-slate-500;
+}
+
+.unassigned,
+.warning {
+    @apply flex flex-col rounded-xl border px-4 py-3;
+}
+
+.unassigned {
+    @apply border-red-200 bg-red-50 text-red-600;
+}
+
+.warning {
+    @apply border-amber-200 bg-amber-50 text-amber-700;
+}
+
+.unassigned strong,
+.warning strong {
+    @apply text-sm font-bold;
+}
+
+.unassigned span,
+.warning span {
+    @apply text-xs font-semibold uppercase tracking-wide;
+}
+
+.footer {
+    @apply mt-1 border-t border-slate-200 pt-5;
+}
+
+.totalLine {
+    @apply mb-4 flex items-end justify-between;
+}
+
+.totalLine span {
+    @apply text-sm text-slate-500;
+}
+
+.totalLine strong {
+    @apply text-2xl font-bold text-slate-900;
+}
+
+.footer button {
+    @apply flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600
+        px-4 py-3 text-sm font-bold text-white transition-colors duration-150
+        hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2
+        focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed
+        disabled:bg-slate-200 disabled:text-slate-500;
+}
+
+.footer p {
+    @apply mt-3 text-center text-xs text-slate-400;
+}
+
+@media (max-width: 980px) {
+    .panel {
+        @apply max-w-none;
+    }
+}

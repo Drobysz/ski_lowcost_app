@@ -1,0 +1,29 @@
+@reference "tailwindcss";
+
+
+.title_spacing {
+    @apply flex flex-col gap-2;
+}
+
+.title_h1 {
+    @apply text-5xl;
+}
+
+.subtitle_spacing {
+    @apply flex items-start justify-between;
+}
+
+.subtitle {
+    @apply text-lg text-gray-800;
+}
+
+.alert {
+    @apply text-xs text-red-800;
+}
+
+.sort_btn {
+    @apply flex items-center gap-1
+        duration-200 transition-colors
+        hover:bg-gray-200 rounded-full
+        px-3 py-1;
+}

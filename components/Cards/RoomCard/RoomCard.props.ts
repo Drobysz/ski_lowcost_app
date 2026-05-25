@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type view = 'parking' | 'mountains';
 
 export interface RoomProps {
@@ -10,6 +12,7 @@ export interface RoomProps {
     view: view;
     balcony: boolean;
     images: ImageProps[];
+    setSwitch?: Dispatch<SetStateAction<boolean>>
 }
 
 export interface ImageProps {

@@ -1,0 +1,32 @@
+@reference "tailwindcss";
+
+.page {
+    @apply grid grid-cols-[minmax(0,1fr)_330px] gap-6;
+}
+
+.mainColumn {
+    @apply flex min-w-0 flex-col gap-5;
+}
+
+.notice {
+    @apply rounded-2xl border border-blue-100 bg-blue-50 px-5 py-4
+        text-sm font-medium text-blue-700;
+}
+
+.empty {
+    @apply rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm;
+}
+
+.empty h1 {
+    @apply text-2xl font-bold text-slate-900;
+}
+
+.empty p {
+    @apply mt-2 text-sm text-slate-500;
+}
+
+@media (max-width: 980px) {
+    .page {
+        @apply grid-cols-1;
+    }
+}

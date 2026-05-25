@@ -14,7 +14,8 @@ export const FilterInput = ({
 })=> {
     const {
         available,
-        setAvailable
+        setAvailable,
+        setChoosedRooms
     } = useContext(BookingContext);
 
     const checked = name === "room_size"
@@ -46,6 +47,7 @@ export const FilterInput = ({
                 filters: Object.keys(nextFilters).length > 0 ? nextFilters : undefined
             };
         });
+        setChoosedRooms([]);
     }
 
     return (

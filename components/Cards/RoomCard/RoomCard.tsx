@@ -11,10 +11,11 @@ export const RoomCard = ({
     surface, 
     view, 
     balcony, 
-    images 
+    images,
+    setSwitch 
 }: RoomProps) => {
     return(
-        <article className="flex flex-col gap-3 p-1">
+        <article className="flex flex-col gap-3 p-1 w-fit">
             <ImageSwitcher 
                 images={images}
                 nb_lits={nb_lits}
@@ -26,6 +27,7 @@ export const RoomCard = ({
                 balcony={balcony} 
                 floor={floor} 
                 num={num} 
+                onClick={()=> setSwitch && setSwitch(p=>!p)}
             />
         </article>
     )

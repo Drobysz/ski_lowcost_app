@@ -1,0 +1,12 @@
+@reference "tailwindcss";
+
+.room_tag {
+    @apply rounded-2xl pr-2 pl-2.5 py-1 text-gray-800
+        flex gap-1 items-center bg-gray-100 w-fit;
+}
+
+.tag_cross {
+    @apply px-1 h-fit rounded-full transition-all
+        duration-200 ease-in hover:bg-gray-300
+        active:scale-98 text-gray-600;
+}
