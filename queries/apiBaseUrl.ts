@@ -5,8 +5,8 @@ const rawApiBaseUrl =
 	"http://localhost:8000/api";
 
 const normalizedApiBaseUrl = rawApiBaseUrl.replace(/\/+$/, "");
-const apiBaseUrl = normalizedApiBaseUrl.endsWith("/api")
+const apiBaseUrl = normalizedApiBaseUrl.endsWith("/ski_lowcost_api")
 	? normalizedApiBaseUrl
-	: `${normalizedApiBaseUrl}/api`;
+	: `${normalizedApiBaseUrl}/ski_lowcost_api`;
 
 export default apiBaseUrl
