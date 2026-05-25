@@ -2,5 +2,5 @@
 
 .markup {
     @apply flex flex-col gap-6 items-center
-        py-10 h-fit max-h-screen overflow-y-scroll;
+        py-10 h-fit min-h-screen;
 }

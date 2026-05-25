@@ -4,3 +4,15 @@
     @apply grid grid-cols-2 relative w-full
         gap-y-10 gap-x-3;
 }
+
+@media (max-width: 760px) {
+    .room_list {
+        @apply grid-cols-1 justify-items-center gap-y-7;
+    }
+}
+
+@media (max-width: 420px) {
+    .room_list {
+        @apply gap-y-5;
+    }
+}

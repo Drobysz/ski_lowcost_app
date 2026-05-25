@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useEffect, useRef, useState } from "react";
 import { BookingInterface } from "./booking.interface";
 import { Available } from "@/interface/Filter";
 import { fetchAvailable } from "@/queries/fetchAvailable";
@@ -48,13 +48,18 @@ export const BookingContextProvider = ({
     const [users, setUsers] = useState<UserSession[]>([]);
     const [choosedRooms, setChoosedRooms] = useState<Room[]>([]);
     const [checkoutPending, setCheckoutPending] = useState(false);
+    const roomsLengthRef = useRef(0);
 
     const page_nb = Math.floor(rooms.length / 6);
 
     useEffect(()=> {
+        roomsLengthRef.current = rooms.length;
+    }, [rooms.length]);
+
+    useEffect(()=> {
         const timer = setTimeout(
             ()=> setDebounceAvailable(available),
-        400);
+        150);
 
         return ()=> clearTimeout(timer);
     }, [available])    
@@ -65,7 +70,9 @@ export const BookingContextProvider = ({
 
         const getAvailableRooms = async ()=> {
             setPage(1);
-            setPending(true);
+            if (roomsLengthRef.current === 0) {
+                setPending(true);
+            }
             try {
                 const fetchedRooms = await fetchAvailable(debounceAvailable);
 
@@ -88,8 +95,6 @@ export const BookingContextProvider = ({
 
         return ()=> { ignore = true }
     }, [debounceAvailable])
-
-    useEffect(()=> console.log(rooms), [rooms])
 
     return (
         <BookingContext.Provider

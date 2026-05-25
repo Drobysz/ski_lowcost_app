@@ -2,9 +2,10 @@
 
 .filter_body {
     @apply border border-gray-400
-        bg-gray-100 max-w-71.5 w-full
+        bg-gray-100 w-full
         p-8 flex flex-col gap-3
         rounded-2xl;
+    max-width: 20.5rem;
 }
 
 .filter_body h3 {
@@ -13,4 +14,16 @@
 
 .category {
     @apply flex flex-col gap-4;
+}
+
+@media (max-width: 980px) {
+    .filter_body {
+        max-width: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .filter_body {
+        @apply rounded-xl p-4;
+    }
 }

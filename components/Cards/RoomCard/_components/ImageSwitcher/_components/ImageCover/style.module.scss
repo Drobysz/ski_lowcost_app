@@ -1,7 +1,11 @@
 @reference "tailwindcss";
 
 .image_cover {
-    @apply shrink-0 p-4 w-76.5 h-52 max-w-full rounded-2xl;
+    @apply relative shrink-0 w-76.5 h-52 max-w-full overflow-hidden rounded-2xl bg-slate-100;
+}
+
+.image_cover :global(img) {
+    @apply h-full w-full object-cover;
 }
 
 @media (max-width: 640px) {

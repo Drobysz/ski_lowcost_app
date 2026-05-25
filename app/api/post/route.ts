@@ -8,7 +8,8 @@ async function postItem<TBody extends object>(
 	body: TBody, 
 	accessToken: string, 
 	endpoint: string,
-	method: string
+	method: string,
+	frontendOrigin: string
 ) {
 	const controller = new AbortController();
 	const timeoutId = setTimeout(() => controller.abort(), 15_000);
@@ -20,6 +21,7 @@ async function postItem<TBody extends object>(
 				"Content-Type": "application/json",
 				"Accept": "application/json",
 				"Authorization": `Bearer ${accessToken}`,
+				"X-Frontend-Origin": frontendOrigin,
 			},
 			body: JSON.stringify(body),
 			cache: "no-store",
@@ -37,12 +39,14 @@ async function postItem<TBody extends object>(
 
 export async function PATCH(request: Request) {
 	const { searchParams } = new URL(request.url);
+	const frontendOrigin = new URL(request.url).origin;
     const item = searchParams.get("item") ?? "";
 	const method = searchParams.get("method") ?? "";
     const endpointLib = {
         available: "rooms/available",
         me: "profile",
-        reservations: "reservations"
+        reservations: "reservations",
+        stripeCheckout: "stripe/checkout"
     }
 
 	const endpoint = endpointLib[item as keyof typeof endpointLib]; 
@@ -60,7 +64,7 @@ export async function PATCH(request: Request) {
 	let res: Response;
 
 	try {
-		res = await postItem(body, accessToken, endpoint, method);
+		res = await postItem(body, accessToken, endpoint, method, frontendOrigin);
 	} catch {
 		return failedToFetch();
 	} finally {
@@ -75,7 +79,7 @@ export async function PATCH(request: Request) {
 		}
 
 		try {
-			res = await postItem(body, refreshedAccessToken, endpoint, method);
+			res = await postItem(body, refreshedAccessToken, endpoint, method, frontendOrigin);
 		} catch {
 			return failedToFetch();
 		}

@@ -2,9 +2,9 @@
 
 .wrapper {
     display: grid;
-	grid-template-columns: minmax(2rem, auto) minmax(80px, 420px) minmax(190px, 860px) minmax(2rem, auto);
+	grid-template-columns: minmax(1rem, 1fr) minmax(280px, 360px) minmax(0, 860px) minmax(1rem, 1fr);
     grid-template-areas: ". aside main .";
-    @apply w-full min-h-screen py-6;
+    @apply w-full min-h-screen gap-6 py-6;
 }
 
 .main {
@@ -13,6 +13,7 @@
 
 .aside {
     grid-area: aside;
+    @apply min-w-0;
 }
 
 .checkoutWrapper {
@@ -26,6 +27,12 @@
         grid-template-areas:
             ". aside ."
             ". main .";
-        @apply gap-6;
+        @apply gap-6 py-4;
+    }
+}
+
+@media (max-width: 520px) {
+    .wrapper {
+        grid-template-columns: minmax(0.75rem, auto) minmax(0, 1fr) minmax(0.75rem, auto);
     }
 }

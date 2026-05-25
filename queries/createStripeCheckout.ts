@@ -1,26 +1,22 @@
-export type CreateReservationPayload = {
-    client_id: number;
-    check_in: string;
-    check_out: string;
-    total_price: number;
-    accommodations: Array<{
-        room_id: number;
-        client_id: number;
-    }>;
+export type CreateStripeCheckoutPayload = {
+    reservation_id: number;
+    final_price: number;
+    currency: "eur";
+    title: string;
 };
 
-export type CreateReservationResponse = {
-    id: number;
+export type StripeCheckoutResponse = {
+    checkout_url: string;
 };
 
-export const createReservation = async (
-    payload: CreateReservationPayload,
-): Promise<CreateReservationResponse> => {
+export const createStripeCheckout = async (
+    payload: CreateStripeCheckoutPayload,
+): Promise<StripeCheckoutResponse> => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15_000);
 
     try {
-        const res = await fetch("/api/post?item=reservations&method=POST", {
+        const res = await fetch("/api/post?item=stripeCheckout&method=POST", {
             method: "PATCH",
             headers: {
                 Accept: "application/json",
@@ -35,13 +31,13 @@ export const createReservation = async (
         const data = await res.json().catch(() => null);
 
         if (!res.ok) {
-            throw new Error(data?.message ?? "Failed to create reservation");
+            throw new Error(data?.message ?? "Failed to start Stripe checkout");
         }
 
         return data.data;
     } catch (error) {
         if (error instanceof DOMException && error.name === "AbortError") {
-            throw new Error("Reservation request timed out");
+            throw new Error("Stripe checkout request timed out");
         }
 
         throw error;

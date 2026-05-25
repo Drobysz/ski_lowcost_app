@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import Image from "next/image";
 import cn from "classnames";
 import s from "./style.module.scss";
 
@@ -11,14 +12,18 @@ export const ImageCover = forwardRef<HTMLDivElement, ImageCoverProps>(
     return (
       <div
         ref={ref}
-        style={{
-          backgroundImage: `url(${url})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
         className={cn(s.image_cover, className)}
         {...props}
-      />
+      >
+        <Image
+          src={url}
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 640px) 100vw, 306px"
+          unoptimized
+        />
+      </div>
     );
   }
 );

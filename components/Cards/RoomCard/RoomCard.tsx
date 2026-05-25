@@ -15,7 +15,7 @@ export const RoomCard = ({
     setSwitch 
 }: RoomProps) => {
     return(
-        <article className="flex flex-col gap-3 p-1 w-fit">
+        <article className="flex flex-col gap-3 p-1 w-fit shrink-0">
             <ImageSwitcher 
                 images={images}
                 nb_lits={nb_lits}

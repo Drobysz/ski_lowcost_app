@@ -1,10 +1,9 @@
 "use client";
 
 import { useContext, useMemo } from "react";
-import { useRouter } from "next/navigation";
 import { BookingContext } from "../context/booking.context";
 import { GlobalContext } from "@/app/context/global.context";
-import { createReservation } from "@/queries";
+import { createReservation, createStripeCheckout } from "@/queries";
 import { CheckoutSummary } from "./_sections/CheckoutSummary/CheckoutSummary";
 import { MembersPriceTable } from "./_sections/MembersPriceTable/MembersPriceTable";
 import {
@@ -40,15 +39,12 @@ const buildAccommodations = (rooms: Room[], members: UserSession[]) => {
 };
 
 export default function BookingCheckoutPage() {
-    const router = useRouter();
     const {
         choosedRooms = [],
         users = [],
         available,
         checkoutPending,
         setCheckoutPending,
-        setChoosedRooms,
-        setUsers,
     } = useContext(BookingContext);
     const {
         user: currentUser,
@@ -72,26 +68,27 @@ export default function BookingCheckoutPage() {
         setCheckoutPending(true);
 
         try {
-            await createReservation({
+            const reservation = await createReservation({
                 client_id: currentUser.id,
                 check_in: available.check_in,
                 check_out: available.check_out,
                 total_price: summary.grandTotal,
                 accommodations: buildAccommodations(choosedRooms, users),
             });
-            setNotification({
-                text: "Reservation was created successfully",
-                status: "success",
+
+            const stripeSession = await createStripeCheckout({
+                reservation_id: reservation.id,
+                final_price: summary.grandTotal,
+                currency: "eur",
+                title: `Zarza-Ski booking for ${users.length} guest${users.length > 1 ? "s" : ""}`,
             });
-            setChoosedRooms([]);
-            setUsers([]);
-            router.push("/my_stays");
+
+            window.location.assign(stripeSession.checkout_url);
         } catch {
             setNotification({
                 text: "Failed to create reservation",
                 status: "error",
             });
-        } finally {
             setCheckoutPending(false);
         }
     };

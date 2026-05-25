@@ -52,9 +52,9 @@ export const CheckoutSummary = ({
                 onClick={onConfirm}
             >
                 <LockKeyhole size={16} aria-hidden="true" />
-                {pending ? "Creating reservation..." : "Confirm Booking"}
+                {pending ? "Starting Stripe checkout..." : "Continue to Stripe"}
             </button>
-            <p>Payment is completed by the current client.</p>
+            <p>Payment is completed securely in Stripe by the current client.</p>
         </aside>
     );
 };

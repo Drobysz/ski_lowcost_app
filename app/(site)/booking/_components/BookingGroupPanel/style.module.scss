@@ -90,3 +90,22 @@
         @apply max-w-none;
     }
 }
+
+@media (max-width: 520px) {
+    .panel {
+        @apply gap-4 rounded-xl p-4;
+    }
+
+    .header {
+        @apply items-start;
+    }
+
+    .avatar {
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+
+    .totalLine {
+        @apply items-start;
+    }
+}

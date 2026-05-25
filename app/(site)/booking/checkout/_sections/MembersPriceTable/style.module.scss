@@ -32,11 +32,11 @@
 
 @media (max-width: 680px) {
     .table {
-        @apply p-4;
+        @apply rounded-xl p-4;
     }
 
     .header {
-        @apply items-start;
+        @apply items-start flex-col;
     }
 
     .header h1 {
