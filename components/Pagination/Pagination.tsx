@@ -18,7 +18,7 @@ export const Pagination = ({
     const pn = usePathname();
     const sp = useSearchParams();
 
-    const spTab = (sp.get('tab') ?? "none");
+    const spTab = (sp.get('tab') ?? "upcoming");
 
     const defaultCoord = { left: 0, width: 0 };
 
