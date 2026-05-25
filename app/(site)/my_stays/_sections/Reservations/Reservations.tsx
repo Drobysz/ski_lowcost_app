@@ -16,7 +16,7 @@ export const Reservations = ()=> {
     } = useContext(StayContext);
 
     const sp = useSearchParams()
-    const category = (sp.get('category') ?? "approaching");
+    const category = (sp.get('category') ?? "upcoming");
     const today = new Date().toDateString();
     const filterefReserves = reserves
         ? reserves?.filter(res=> getTimeStatus(res.check_in, res.check_out, today) == category) 
