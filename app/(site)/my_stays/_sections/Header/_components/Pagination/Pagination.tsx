@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { capitalize } from "@/helper/string";
 import {
     Cursor,
@@ -12,6 +12,16 @@ import { CursorPosition, PaginationProps } from "./Pagination.props";
 import { usePathname, useSearchParams } from "next/navigation";
 
 export const Pagination = ({
+    tabs,
+}: PaginationProps) => {
+    return (
+        <Suspense fallback={null}>
+            <PaginationContent tabs={tabs} />
+        </Suspense>
+    );
+};
+
+const PaginationContent = ({
     tabs,
 }: PaginationProps) => {
     const pn = usePathname();

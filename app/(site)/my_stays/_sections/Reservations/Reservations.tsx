@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { StayContext } from "../../context/stay.context";
 import { Loading } from "./_components/Loading"; 
 import { useSearchParams } from "next/navigation";
@@ -9,6 +9,14 @@ import s from "./style.module.scss";
 import { getTimeStatus } from "@/helper";
 
 export const Reservations = ()=> {
+    return (
+        <Suspense fallback={null}>
+            <ReservationsContent />
+        </Suspense>
+    );
+}
+
+const ReservationsContent = ()=> {
     const {
         reserves,
         isReserveLoading,

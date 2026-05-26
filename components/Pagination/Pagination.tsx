@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import {
     Cursor,
     Tab,
@@ -12,6 +12,17 @@ import { CursorPosition, PaginationProps } from "./Pagination.props";
 import { usePathname, useSearchParams } from "next/navigation";
 
 export const Pagination = ({
+    tabs,
+    isLoading
+}: PaginationProps) => {
+    return (
+        <Suspense fallback={null}>
+            <PaginationContent tabs={tabs} isLoading={isLoading} />
+        </Suspense>
+    );
+};
+
+const PaginationContent = ({
     tabs,
     isLoading
 }: PaginationProps) => {
