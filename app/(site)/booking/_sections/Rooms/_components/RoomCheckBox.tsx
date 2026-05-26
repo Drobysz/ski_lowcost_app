@@ -13,7 +13,10 @@ export const RoomCheckBox = ({
     r: Room
 })=> {
     const [chosen, setChosen] = useState(false);
-    const { isLoggedIn } = useContext(GlobalContext);
+    const { 
+        isLoggedIn,
+        setNotification
+    } = useContext(GlobalContext);
     const {
         choosedRooms, 
         setChoosedRooms
@@ -48,6 +51,13 @@ export const RoomCheckBox = ({
         if (!isIncluded) updateState();
     }, [choosedRooms, r.id]);
 
+    const handleAlert = ()=> {
+        setNotification({
+            status: "alert",
+            text: "Sign up to make reservations"
+        });
+    }
+
     return (
         <div
             className={cn(
@@ -66,7 +76,7 @@ export const RoomCheckBox = ({
                 surface={r.surface}
                 id={r.id}
                 floor={r.floor}
-                setSwitch={isLoggedIn == "auth" ? setChosen : ()=> {}}
+                setSwitch={isLoggedIn == "auth" ? setChosen : handleAlert}
             />
         </div>
     )

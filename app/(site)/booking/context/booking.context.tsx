@@ -51,7 +51,7 @@ export const BookingContextProvider = ({
     const [checkoutPending, setCheckoutPending] = useState(false);
     const roomsLengthRef = useRef(0);
 
-    const page_nb = Math.floor(rooms.length / 6);
+    const page_nb = Math.ceil(rooms.length / 6);
 
     useEffect(()=> {
         roomsLengthRef.current = rooms.length;

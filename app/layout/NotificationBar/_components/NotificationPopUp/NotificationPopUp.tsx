@@ -33,7 +33,7 @@ export const NotificationPopUp = ({
                 visible ? "flex" : "hidden",
                 s.notif_popup, {
                     ["bg-red-200 border-red-700 text-red-500"]: status == "error",
-                    ["bg-orange-200 border-orange-700 text-orange-500"]: status == "alert",
+                    ["bg-orange-100 border-amber-400 text-amber-400"]: status == "alert",
                     ["bg-green-200 border-green-700 text-green-500"]: status == "success",
                 }
             )}

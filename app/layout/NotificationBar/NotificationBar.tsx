@@ -1,7 +1,7 @@
 "use client";
 
 import { GlobalContext } from "@/app/context/global.context";
-import { JSX, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import s from "./style.module.scss";
 import { NotificationPopUp } from "./_components";
 import { NotificationStatus } from "@/app/context/global.interface";
@@ -23,20 +23,18 @@ export const NotificationBar = ()=> {
 
         setTimeout(() => {
             setPopUps((prev) => [
-            ...prev,
-            {
-                id,
-                text: notification.text,
-                status: notification.status,
-            },
+                ...prev,
+                {
+                    id,
+                    text: notification.text,
+                    status: notification.status,
+                },
             ]);
         }, 0);
 
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             setPopUps((prev) => prev.filter((popUp) => popUp.id !== id));
         }, 3000);
-
-        return () => clearTimeout(timer);
     }, [notification]);
 
     return (
