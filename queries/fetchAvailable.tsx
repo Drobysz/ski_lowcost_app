@@ -5,7 +5,7 @@ export const fetchAvailable = async (available: Available) => {
     const timeoutId = setTimeout(() => controller.abort(), 15_000);
 
     try {
-        const res = await fetch(`/api/post?item=available&method=POST`, {
+        const res = await fetch(`/api/post?item=available&method=POST&auth=none`, {
             method: "PATCH",
             headers: {
                 Accept: "application/json",

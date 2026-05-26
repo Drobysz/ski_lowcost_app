@@ -66,7 +66,7 @@ export const RoomCheckBox = ({
                 surface={r.surface}
                 id={r.id}
                 floor={r.floor}
-                setSwitch={setChosen}
+                setSwitch={isLoggedIn == "auth" ? setChosen : ()=> {}}
             />
         </div>
     )

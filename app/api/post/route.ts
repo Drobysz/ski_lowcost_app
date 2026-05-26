@@ -6,23 +6,28 @@ import { failedToFetch, unauthorizedResponse } from "@/queries/statusResponses";
 
 async function postItem<TBody extends object>(
 	body: TBody, 
-	accessToken: string, 
 	endpoint: string,
 	method: string,
-	frontendOrigin: string
+	frontendOrigin: string,
+	accessToken?: string,
+	isTokenNeeded: boolean = true
 ) {
 	const controller = new AbortController();
 	const timeoutId = setTimeout(() => controller.abort(), 15_000);
 
+	const headersNoneAuth = {
+		"Content-Type": "application/json",
+		"Accept": "application/json",
+		"X-Frontend-Origin": frontendOrigin
+	}
+	const bearerToken = { "Authorization": `Bearer ${accessToken}`, };
+
+	const headers = isTokenNeeded ? {...headersNoneAuth, ...bearerToken} : headersNoneAuth;
+
 	try {
 		return await fetch(`${apiBaseUrl}/${endpoint}`, {
 			method: method,
-			headers: {
-				"Content-Type": "application/json",
-				"Accept": "application/json",
-				"Authorization": `Bearer ${accessToken}`,
-				"X-Frontend-Origin": frontendOrigin,
-			},
+			headers: headers,
 			body: JSON.stringify(body),
 			cache: "no-store",
 			signal: controller.signal,
@@ -41,6 +46,8 @@ export async function PATCH(request: Request) {
 	const { searchParams } = new URL(request.url);
 	const frontendOrigin = new URL(request.url).origin;
     const item = searchParams.get("item") ?? "";
+	const authMsg = searchParams.get("auth") ?? "token";
+	const isTokenNeeded = authMsg == "token";
 	const method = searchParams.get("method") ?? "";
     const endpointLib = {
         available: "rooms/available",
@@ -57,14 +64,14 @@ export async function PATCH(request: Request) {
 
 	const accessToken = await getToken("access") ?? await refreshAccessToken();
 
-	if (!accessToken) {
+	if (!accessToken && isTokenNeeded) {
 		return unauthorizedResponse();
 	}
 
 	let res: Response;
 
 	try {
-		res = await postItem(body, accessToken, endpoint, method, frontendOrigin);
+		res = await postItem(body, endpoint, method, frontendOrigin, accessToken, isTokenNeeded);
 	} catch {
 		return failedToFetch();
 	} finally {
@@ -79,7 +86,7 @@ export async function PATCH(request: Request) {
 		}
 
 		try {
-			res = await postItem(body, refreshedAccessToken, endpoint, method, frontendOrigin);
+			res = await postItem(body, endpoint, method, frontendOrigin, accessToken, isTokenNeeded);
 		} catch {
 			return failedToFetch();
 		}

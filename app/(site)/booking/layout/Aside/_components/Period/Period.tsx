@@ -4,6 +4,7 @@ import { BookingContext } from "@/app/(site)/booking/context/booking.context";
 import { useContext, useEffect, useState } from "react";
 import s from "./style.module.scss";
 import { addDaysToInputDate, toInputDate } from "@/helper/time";
+import { GlobalContext } from "@/app/context/global.context";
 
 export const Period = ()=> {
     const { 
@@ -12,12 +13,22 @@ export const Period = ()=> {
         setChoosedRooms
     } = useContext(BookingContext);
 
+    const { setNotification } = useContext(GlobalContext);
+
     const [checkIn, setCheckIn]= useState(toInputDate(available.check_in));
     const [checkOut, setCheckOut]= useState(toInputDate(available.check_out));
     const minCheckOut = checkIn ? addDaysToInputDate(checkIn, 1) : undefined;
+    const today = toInputDate(new Date());
 
     const changeCheckIn = (value: string) => {
-        setCheckIn(value);
+        if (value && value >= today) {
+            setCheckIn(value);
+        } else {
+            setNotification({
+                status: "alert",
+                text: "You can't choose a past date"
+            });
+        }
 
         if (value && (!checkOut || checkOut <= value)) {
             setCheckOut(addDaysToInputDate(value, 1));
