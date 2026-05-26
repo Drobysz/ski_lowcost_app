@@ -1,16 +1,27 @@
+"use client";
+
 import cn from "classnames";
 import { 
     Filters,
     Period,
     RoomTags,
-    BookingGroupPanel
+    BookingGroupPanel,
+    SignUpNote
 } from "./_components";
+import { useContext } from "react";
+import { GlobalContext } from "@/app/context/global.context";
 
 export const Aside = ({
     className
 }: {
     className: string
 })=> {
+    const {
+        user,
+        userError,
+        isUserLoading,
+    } = useContext(GlobalContext);
+
     return (
         <aside className={cn(
             className,
@@ -20,7 +31,10 @@ export const Aside = ({
                 <RoomTags />
                 <Filters />
                 <Period />
-                <BookingGroupPanel />
+                {!userError && user
+                    ? <BookingGroupPanel isLoading={isUserLoading} /> 
+                    : <SignUpNote />
+                }
             </div>
         </aside>
     )

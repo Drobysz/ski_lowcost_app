@@ -1,0 +1,7 @@
+@reference "tailwindcss";
+
+.signup_note_body {
+    @apply px-2 py-1.5 rounded-xl border
+        border-amber-500 bg-amber-200
+        text-amber-500 text-sm;
+}

@@ -5,6 +5,7 @@ import { Room } from "@/interface/Reservation"
 import { useContext, useEffect, useState } from "react";
 import { BookingContext } from "../../../context/booking.context";
 import cn from "classnames";
+import { GlobalContext } from "@/app/context/global.context";
 
 export const RoomCheckBox = ({
     r
@@ -12,26 +13,29 @@ export const RoomCheckBox = ({
     r: Room
 })=> {
     const [chosen, setChosen] = useState(false);
+    const { isLoggedIn } = useContext(GlobalContext);
     const {
         choosedRooms, 
         setChoosedRooms
     } = useContext(BookingContext);
 
     useEffect(() => {
-        setChoosedRooms((prev) => {
-            const exists = prev.some((room) => room.id === r.id);
+        if (isLoggedIn == "auth") {
+            setChoosedRooms((prev) => {
+                const exists = prev.some((room) => room.id === r.id);
 
-            if (chosen && !exists) {
-                return [...prev, r];
-            }
+                if (chosen && !exists) {
+                    return [...prev, r];
+                }
 
-            if (!chosen && exists) {
-                return prev.filter((room) => room.id !== r.id);
-            }
+                if (!chosen && exists) {
+                    return prev.filter((room) => room.id !== r.id);
+                }
 
-            return prev;
-        });
-    }, [chosen, r, setChoosedRooms]);
+                return prev;
+            });
+        }
+    }, [chosen, r, setChoosedRooms, isLoggedIn]);
 
     useEffect(()=> {
         const isIncluded = choosedRooms && 

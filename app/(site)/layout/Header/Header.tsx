@@ -31,15 +31,18 @@ export const Header = ({
     const winWidth = useWindowWidth();
     const isLessOrEqual820 = winWidth !== null && winWidth <= 820;
 
-    const tabs = [
+    const defaultTabs = [
         { href: '/', label: "Main Page" },
         { href: "/booking", label: "Booking" },
+    ];
+
+    const userTabs = [
         { href: "/my_stays", label: "My stays" }
     ]
-    const canShowBurger = 
-        isLoggedIn === "auth" 
-        && user !== undefined
-        && isLessOrEqual820;
+
+    const tabs = !userError && user
+        ? [...defaultTabs, ...userTabs] 
+        : defaultTabs;
 
     useEffect(() => {
         const onScroll = () => {
@@ -58,7 +61,7 @@ export const Header = ({
             className
         )}>
             <div className={s.brand}>
-                {canShowBurger && (
+                {isLessOrEqual820 && (
                     <BurgerBtn
                         isMenuOpen={isMenuOpen}
                         setIsMenuOpen={setIsMenuOpen}
@@ -72,19 +75,17 @@ export const Header = ({
                 </p>
             </div>
             <div className={s.desktop_nav}>
-                {!userError && user &&
-                    <Pagination
-                        tabs={tabs}
-                        isLoading={isUserLoading}
-                    />
-                }
+                <Pagination
+                    tabs={tabs}
+                    isLoading={isUserLoading}
+                />
             </div>
             <Profile
                 user={user}
                 isLoading={isUserLoading}
                 error={userError}
             />
-            {canShowBurger && (
+            {isLessOrEqual820 && (
                 <MobileMenu
                     tabs={tabs}
                     isMenuOpen={isMenuOpen}

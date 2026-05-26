@@ -36,7 +36,7 @@ export default function LoginPage() {
         );
     
     useEffect(() => {
-        if (state.message !== undefined) {
+        if (state.success !== undefined) {
             if (state.success) {
                 setNotification({
                     status: "success",

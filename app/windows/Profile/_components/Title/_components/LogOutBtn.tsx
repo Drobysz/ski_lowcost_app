@@ -32,6 +32,11 @@ export const LogOutBtn = ()=> {
             return;
         }
 
+        setNotification({
+            status: "success",
+            text: "Successfully logged out"
+        });
+
         setIsLoggedIn("no_auth");
         setModalWindow("none");
 

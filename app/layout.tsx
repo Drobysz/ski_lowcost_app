@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { jakarta_regular } from "@/fonts/fonts";
 import { GlobalContextProvider } from "./context/global.context";
+import { NotificationBar } from "./layout/index";
 
 export const metadata: Metadata = {
   title: "Main Page",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={jakarta_regular.className}>
         <GlobalContextProvider>
           {children}
+          <NotificationBar />
         </GlobalContextProvider>
       </body>
     </html>

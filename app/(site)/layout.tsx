@@ -4,8 +4,7 @@ import {
     Header,
     Footer,
     BlurBackground,
-    ModalWindow,
-    NotificationBar
+    ModalWindow
 } from "./layout/index"
 
 export default function SiteLayout({
@@ -25,7 +24,6 @@ export default function SiteLayout({
                 <Footer />
             </BlurBackground>
             <ModalWindow />
-            <NotificationBar />
         </>
     )
 }
